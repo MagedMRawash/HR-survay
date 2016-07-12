@@ -1,0 +1,112 @@
+header
+    .container
+        .row
+            .col-md-12
+                .menu-icon 
+                    span.logo-icon  
+                    | for innocence Project 
+        
+    
+section.total-hour
+    .container
+        .row
+            .col-md-12
+                .time 63
+                    span  Hours
+                        
+section.tasks
+    .container(ng-controller="stoveController as stoveTasks")
+        .row
+            div.col-md-12
+                // Nav tabs
+                ul.nav.nav-tabs.row.no-gutter(role='tablist')
+                    li.col-md-2.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in stoveTasks.phases ", class="<%$index ==0 ? 'active': ''%>")
+                        a(href='#<%key%>', aria-controls='<%key%>', role='tab', data-toggle='tab') <%key%>
+                            span <%phase.length%>
+
+                // Tab panes
+                .tab-content
+                    .tab-pane.fade.in(role='tabpanel',ng-repeat="(key , phase) in stoveTasks.phases ",id="<%key%>", class="<%$index ==0 ? 'active': ''%>") 
+                        .row.table-row.no-gutter.accordion-item(ng-repeat="task in phase ")
+                            // a.col-md-12(role='button', data-toggle='collapse', href='#<%key + $index%> ', aria-expanded='false', aria-controls='<%key + $index%>  ')
+                            a.col-md-12.accordion-child( href='#<%key + $index%> ')
+                                .row
+                                    .col-md-10.col-xs-8
+                                        .row
+                                            .col-md-12
+                                                h2 <%task.title%> 
+                                                    span.desc-icon
+                                            .col-md-12.description
+                                                p   <%task.description%> 
+                                            .col-md-12.estimate
+                                                p Estimate: 40 Hours
+                                  
+                           
+
+
+                                    .col-md-1.col-xs-2 
+                                        button.comment(ng-show="<%task.isComment%>" ,type='button', data-container='body', data-toggle='popover', data-placement='bottom', data-content='')
+                                        .PopupCont-comment 
+                                                .close.col-md-12
+                                                        .icon.pull-right
+                                                .row.com-row.first
+                                                    .col-md-12
+                                                        span.name Martin Legrand
+                                                        span.date April 13 at 4:49pm
+                                                    .col-md-12
+                                                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod non nibh quis aliquam. Maecenas ornare at felis vitae luctus.
+                                                .row.com-row
+                                                    .col-md-12
+                                                        span.name Martin Legrand
+                                                        span.date April 13 at 4:49pm
+                                                    .col-md-12
+                                                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod non nibh quis aliquam. Maecenas ornare at felis vitae luctus.
+                                                .row
+                                                    textarea.col-md-12(placeholder="Leave a comment")
+                                                    .col-md-12.pull-right
+                                                        button.btn.btn-defulte(type="button") Send 
+                                    .col-md-1.col-xs-2
+                                        span.date  <%task.date%> 
+                                        
+                    .addList(id="", class="") 
+                        .row.table-row.no-gutter.accordion-item()
+                           a.col-md-12.accordion-child()
+                                .row
+                                    .close.col-md-12
+                                            .icon.pull-right
+                                    .col-md-12
+                                        form.row
+                                            .col-md-12
+                                                h2 
+                                                    span +  
+                                                    | Add to this list
+                                            .col-md-12.input-div
+                                                input(type="text",placeholder="What you Would like to get done ") 
+                                            .col-md-12.option-link
+                                                .row
+                                                    .col-md-9
+                                                       .row
+                                                           .col-md-1.col-sm-1.col-xs-2
+                                                                .desc-icon
+                                                           .col-md-11.col-xs-10.col-sm-11
+                                                                .init-link Share More Details
+                                                                .hidden-div
+                                                                    | The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.
+                                                       .row
+                                                           .col-md-1.col-sm-1.col-xs-2
+                                                                .person-icon
+                                                           .col-md-11.col-xs-10.col-sm-11
+                                                                .init-link Enter Your Name
+                                                                .hidden-div
+                                                                    input(type="text",placeholder="Enter Your Name ") 
+                                                       
+                                                    .col-md-3.pull-right
+                                                        button.btn.btn-defulte(type="button") Submit 
+                                                 
+                                  
+                           
+
+
+                                   
+
+
