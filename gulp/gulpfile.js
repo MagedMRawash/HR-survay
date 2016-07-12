@@ -2,7 +2,7 @@ var src = '../src';
 var dist = '../dist';
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var pug = require('gulp-pug');
+var pug = require('gulp-jade');
 var ts = require('gulp-typescript');
 var watch = require('gulp-watch');
  
@@ -11,9 +11,10 @@ gulp.task('default', function() {
   // place code for your default task here
 }); 
 
-gulp.task('pug', function build() {
-  return gulp.src(src+'/pug/index.pug')
-    .pipe(pug({'pretty': true }))
+
+gulp.task('jade', function build() {
+  return gulp.src(src+'/jade/*.jade')
+    .pipe(jade({'pretty': true }))
     .pipe(gulp.dest(dist));
 });
 
@@ -37,8 +38,9 @@ gulp.task('tsc', function () {
 
 
 
+
 gulp.task('watch', function () {
   gulp.watch(src+'/sass/**/*.scss', ['sass']);
   gulp.watch(src+'/typescript/**/*.ts', ['tsc']);
-  gulp.watch(src+'/pug/**/*.pug', ['pug']);
+  gulp.watch(src+'/jade/**/*.jade', ['jade']);
 });

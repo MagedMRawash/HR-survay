@@ -1,0 +1,13 @@
+/nbproject/private/
+*.DS_Store
+.vscode
+/gulp/node_modules
+.idea/*/**
+/articles.json
+/form.html
+/innocence_wp.sql
+/w-logo-blue.png
+/w-logo-white.png
+/wordpress-logo-white.svg
+/wordpress-logo.png
+/wordpress-logo.svg

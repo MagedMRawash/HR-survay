@@ -1,23 +1,28 @@
 {
-  "name": "Stove",
+  "name": "HRSurvay",
   "version": "1.0.0",
-  "description": "project for madeo studio",
-  "main": "entry.js",
+  "description": "Hr survai project",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rawash/HR-survay.git"
+  },
   "keywords": [
-    "stove",
-    "trello",
-    "toggl"
+    "HR"
   ],
-  "author": "Madeo",
+  "author": "Maged Rawash",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rawash/HR-survay/issues"
+  },
+  "homepage": "https://github.com/Rawash/HR-survay",
   "devDependencies": {
-    "gulp-pug": "^1.2.0",
     "gulp-sass": "^2.2.0",
     "gulp-typescript": "^2.12.2",
     "gulp-watch": "^4.3.5",
-    "pug": "^2.0.0-alpha3"
+    "gulp-jade": "*"
   }
 }
