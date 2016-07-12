@@ -2,7 +2,7 @@ var src = '../src';
 var dist = '../dist';
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var pug = require('gulp-jade');
+var jade = require('gulp-jade');
 var ts = require('gulp-typescript');
 var watch = require('gulp-watch');
  

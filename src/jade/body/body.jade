@@ -15,18 +15,18 @@ section.total-hour
                     span  Hours
                         
 section.tasks
-    .container(ng-controller="stoveController as stoveTasks")
+    .container(ng-controller="HRSurvayController as HRSurvayTasks")
         .row
             div.col-md-12
                 // Nav tabs
                 ul.nav.nav-tabs.row.no-gutter(role='tablist')
-                    li.col-md-2.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in stoveTasks.phases ", class="<%$index ==0 ? 'active': ''%>")
+                    li.col-md-2.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in HRSurvayTasks.phases ", class="<%$index ==0 ? 'active': ''%>")
                         a(href='#<%key%>', aria-controls='<%key%>', role='tab', data-toggle='tab') <%key%>
                             span <%phase.length%>
 
                 // Tab panes
                 .tab-content
-                    .tab-pane.fade.in(role='tabpanel',ng-repeat="(key , phase) in stoveTasks.phases ",id="<%key%>", class="<%$index ==0 ? 'active': ''%>") 
+                    .tab-pane.fade.in(role='tabpanel',ng-repeat="(key , phase) in HRSurvayTasks.phases ",id="<%key%>", class="<%$index ==0 ? 'active': ''%>") 
                         .row.table-row.no-gutter.accordion-item(ng-repeat="task in phase ")
                             // a.col-md-12(role='button', data-toggle='collapse', href='#<%key + $index%> ', aria-expanded='false', aria-controls='<%key + $index%>  ')
                             a.col-md-12.accordion-child( href='#<%key + $index%> ')

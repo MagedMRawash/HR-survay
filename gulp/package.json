@@ -20,9 +20,10 @@
   },
   "homepage": "https://github.com/Rawash/HR-survay",
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jade": "*",
     "gulp-sass": "^2.2.0",
     "gulp-typescript": "^2.12.2",
-    "gulp-watch": "^4.3.5",
-    "gulp-jade": "*"
+    "gulp-watch": "^4.3.5"
   }
 }

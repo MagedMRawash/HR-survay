@@ -5,18 +5,18 @@
 */
 var angular : any;
 var go;
-var app = angular.module('stove', [], function($interpolateProvider){
+var app = angular.module('hrsurvay', [], function($interpolateProvider){
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
 });
-app.controller('stoveController', ['$http' , function($http) {
-    var Stove = this;
-    Stove.tasks = toDo;
+app.controller('HRSurvayController', ['$http' , function($http) {
+    var HRSurvay = this;
+    HRSurvay.tasks = toDo;
 
     // $http.get('https://trello.com/1/authorize?expiration=never&name=SinglePurposeToken&key=164fdc267f24780b7e6505b71f2ebd4d').success(function(data) {
  
     // })
-    Stove.phases = {
+    HRSurvay.phases = {
             toDo: toDo,
             doing: doing,
             done: done
