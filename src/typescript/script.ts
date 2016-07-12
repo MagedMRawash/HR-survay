@@ -3,6 +3,7 @@
 ///<reference path="DT/angular.d.ts" />
 ///<reference path="DT/bootstrap.d.ts" />
 */
+var angular : any;
 var go;
 var app = angular.module('stove', [], function($interpolateProvider){
         $interpolateProvider.startSymbol('<%');
@@ -10,11 +11,11 @@ var app = angular.module('stove', [], function($interpolateProvider){
 });
 app.controller('stoveController', ['$http' , function($http) {
     var Stove = this;
-    Stove.tasks = [];
+    Stove.tasks = toDo;
 
-    $http.get('https://trello.com/1/authorize?expiration=never&name=SinglePurposeToken&key=164fdc267f24780b7e6505b71f2ebd4d').success(function(data) {
-
-    })
+    // $http.get('https://trello.com/1/authorize?expiration=never&name=SinglePurposeToken&key=164fdc267f24780b7e6505b71f2ebd4d').success(function(data) {
+ 
+    // })
     Stove.phases = {
             toDo: toDo,
             doing: doing,

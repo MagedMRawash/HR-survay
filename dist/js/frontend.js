@@ -1,110 +1,123 @@
 var $;
-
-$.fn.clickOff = function(callback, selfDestroy) {
-    var clicked = false;
-    var parent = this;
-    var destroy = selfDestroy || true;
-    
-    parent.click(function() {
-        clicked = true;
-    });
-    
-    $(document).click(function(event) { 
-        if (!clicked) {
-            callback(parent, event);
+/**************
+ * JQuery new Method
+ **************** */
+$.fn.equals = function (compareTo) {
+    if (!compareTo || this.length != compareTo.length) {
+        return false;
+    }
+    for (var i = 0; i < this.length; ++i) {
+        if (this[i] !== compareTo[i]) {
+            return false;
         }
-        if (destroy) {
-            //parent.clickOff = function() {};
-            //parent.off("click");
-            //$(document).off("click");
-            //parent.off("clickOff");
-        };
-        clicked = false;
-    });
+    }
+    return true;
 };
-/*$("body").delegate('.active .comment', "mouseenter", function (e) {
+/**************
+ * END JQuery new Method
+ **************** */
+$("body").one("click", function (e) {
+    e.stopPropagation();
     e.preventDefault();
-    $(this).popover({
-        html: true,
-        content: function () {
-            return $(this).next('.PopupCont-comment').html();
-        }
-    });
-    $(this).on('shown.bs.popover', function (ev) {
-        var _this = this;
-        ev.stopPropagation();
-        ev.stopImmediatePropagation();
-        ev.preventDefault();
-        var PopupThis = $(this);
-        $("#" + PopupThis.attr("aria-describedby")).find('.close ').click(function () {
-            PopupThis.click();
-        });
-        $('.comment[aria-describedby]').not(PopupThis).each(function ($) {
-            $(_this).popover('hide');
-        });
-    });
-    $(this).off("mouseenter");
-});*/
-
-$("body").delegate('.popover .close','click',function(){
-    var card_id = $(this).attr('card-id');
-    jQuery(".com_btn-"+card_id).popover('hide').removeClass('active-commnet-btn');
+    triggerEvent();
 });
-
-$("body").delegate('.tab-content .tab-pane .table-row', "click", function (e) {
-    if(!$(this).hasClass('active')){
+function triggerEvent() {
+    $(".comment ").on("initComment", function (e) {
         e.stopPropagation();
+        //e.stopImmediatePropagation()
         e.preventDefault();
-        $('.tab-content .tab-pane .table-row').removeClass('active');
-        $(this).addClass('active');
-        $('.comment[aria-describedby]').not($(this).find('.comment')).popover('hide').removeClass('active-commnet-btn');
-        if($(this).hasClass('add-card-div')){
-            var scroll_top = $(window).scrollTop(),
-                this_height = $(this).height();
-                $('html, body').animate({scrollTop:scroll_top+this_height},500);
+        $(this).popover({
+            html: true,
+            content: function () {
+                return $(this).next('.PopupCont-comment').html();
+            }
+        });
+        $(this).on('shown.bs.popover', function (ev) {
+            ev.stopPropagation();
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            $(this).addClass('opened');
+            var PopupThis = $(this);
+            $("#" + PopupThis.attr("aria-describedby")).find('.close ').click(function () {
+                PopupThis.popover('hide');
+            });
+            $('.opened').not(PopupThis).popover('hide').removeClass('opened');
+        }).on('hidden.bs.popover', function (ev) {
+            ev.stopPropagation();
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            $(this).removeClass('opened');
+        });
+    });
+    /************** openTask ***************** */
+    $('.table-row').on("openTask", function (event) {
+        $(this).trigger('closeTask').addClass('active').find(' .comment ').triggerHandler("initComment");
+    });
+    /************** closeTask ***************** */
+    $('.table-row').on("closeTask", function (e) {
+        $('.table-row').removeClass('active');
+        $('.opened').popover('hide').removeClass('opened');
+    });
+    /************** initComment ***************** */
+    $('.table-row').on("click", function (e) {
+        if (!$(this).hasClass('openedTask')) {
+            $(this).triggerHandler("openTask");
+            $('.table-row').removeClass('openedTask');
+            $(this).addClass('openedTask');
         }
-    }
-});
-
-$(document).on('click','.post-comment-btn',function(){
-    var card_id = $(this).attr('card-id'),
-    angu_scope = angular.element(document.getElementById('mycontroller')).scope();
-    
-    if(angu_scope){
-        angu_scope.post_comment(card_id);
-    }
-});
-
-
-$('body').on('click',function(e){
-    //e.preventDefault();
-    //e.stopPropagation();
-    if(e.target.nodeName == 'BODY'){
-        var angu_scope = angular.element(document.getElementById('mycontroller')).scope();
-        if(angu_scope){
-            angu_scope.resetUI();
+    });
+    $(document).mouseup(function (e) {
+        if (clickedOutSide(e, $(".openedTask , .popover "))) {
+            $(".openedTask").trigger('closeTask').removeClass('openedTask');
         }
+        $('.addList .close .icon').on('click', function (e) {
+            $('.addList .active').removeClass('active');
+        });
+        $('.init-link').click(function () {
+            $(this).parent().addClass('show');
+        });
+    });
+}
+function clickedOutSide(e, params) {
+    var container = params;
+    if (!container.is(e.target) // if the target of the click isn't the container...
+        && container.has(e.target).length === 0) {
+        return true;
     }
-     
-});
-/*$("section.tasks").clickOff(function() {
-    var angu_scope = angular.element(document.getElementById('mycontroller')).scope();
-    
-    if(angu_scope){
-        angu_scope.resetUI();
+    else {
+        return false;
     }
-});*/
-
-$(document).keyup(function(e) {
-  
-  if (e.keyCode === 27){
-        var angu_scope = angular.element(document.getElementById('mycontroller')).scope();
-    
-        if(angu_scope){
-            angu_scope.resetUI();
-        } 
-  } 
+}
+/*******************************
+ ****** ISSUES
+ * if you opened anther task row then open comment for previus task row you have to click unneeded one more click
+ *
+ *********************/
+$('#').onClick(function () {
+    if ($(this).hasClass('opened')) {
+        $('#').fadeOut();
+        $(this).removeClass('opened');
+    }
+    else {
+        $('#').fadeIn();
+        $(this).addClass('opened');
+    }
 });
-
-
-
+arrow - to - ;
+do {
+    display: none;
+} while (
+    .hidden - mobile);
+{
+    display: block;
+}
+{
+    arrow - to - ;
+    do {
+        display: inline - block;
+    } while (
+        .hidden - mobile);
+    {
+        display: none;
+    }
+}
