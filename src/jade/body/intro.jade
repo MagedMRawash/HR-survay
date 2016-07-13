@@ -1,0 +1,10 @@
+section#intro(ng-hide="introShow")
+    .dropdown
+        a#dLabel(data-target='#', href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+            | Chose Personas
+            span.caret
+        ul.dropdown-menu(aria-labelledby='dLabel')
+            li
+                a.hr(href="#", ng-click="ChosePersonas('hr')") HR
+            li
+                a.emp(href="#", ng-click="ChosePersonas('emp')") Employee

@@ -9,25 +9,46 @@ var app = angular.module('hrsurvay', [], function($interpolateProvider){
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
 });
-app.controller('HRSurvayController', ['$http' , function($http) {
+app.controller('HRSurvayController', ['$scope', '$http' , function($scope ,$http) {
+
+     $scope.hrin = false;
+     $scope.empin = false;
+    
+    $scope.introShow = false ;
+
+    $scope.ChosePersonas = function(value) {
+            if(value== 'hr' ){
+                    $scope.hrin = true;
+            }
+            if(value== 'emp' ){
+                    $scope.empin = true;
+            }
+            $scope.introShow =  $scope.hrin ||  $scope.empin ;
+            console.log( $scope.introShow);
+            
+        }
+
+
+
+
     var HRSurvay = this;
-    HRSurvay.tasks = toDo;
+    HRSurvay.tasks = [];
 
     // $http.get('https://trello.com/1/authorize?expiration=never&name=SinglePurposeToken&key=164fdc267f24780b7e6505b71f2ebd4d').success(function(data) {
  
     // })
     HRSurvay.phases = {
-            toDo: toDo,
-            doing: doing,
-            done: done
+            mq :["Manage Questions",  mq],
+            ms : ["Manage surveys",ms],
+            mts : ["Manage targeted sector", mts]
         }
 
 
 }]);
 
+ 
 
-
-var toDo = [{
+var  mq = [{
     title: "Invite and confirm alpha users to be alpha users",
     date: 'Sep 15',
     isComment: true,
@@ -90,7 +111,7 @@ var toDo = [{
 }];
 
 
-var doing = [{
+var ms = [{
     title: "Invite and confirm alpha users to be alpha users",
     date: 'Sep 15',
     isComment: true,
@@ -113,7 +134,7 @@ var doing = [{
 }];
 
 
-var done = [{
+var mts = [{
     title: "Demo alpha version to the 3 alpha users (Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia viverra rutrum. Integer vitae libero ut nibh pellentesque pretium.",
     date: 'Sep 15',
     isComment: true,

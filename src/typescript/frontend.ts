@@ -148,7 +148,8 @@ function clickedOutSide(e : any , params: any ) {
     if (!container.is(e.target) // if the target of the click isn't the container...
         && container.has(e.target).length === 0) // ... nor a descendant of the container
     {
-     return true  
+      return false 
+    // return true  
     }else{
       return false 
     }
@@ -165,30 +166,13 @@ function clickedOutSide(e : any , params: any ) {
 
 
 
-$('#').onClick(function(){
-  if(  $(this).hasClass('opened')  ){
-     $('#').fadeOut();
-  $(this).removeClass('opened');
- }
- else{
-    $('#').fadeIn();
-  $(this).addClass('opened');
- }
-})
-
-
-  #arrow-to-do {
-    display : none;
-  }
-  .hidden-mobile{
-    display : block;    
-  }
-
-@media (max-width: 768px){
-  #arrow-to-do {
-    display : inline-block;
-  }
-  .hidden-mobile{
-    display : none;    
-  }
-}
+// $('#').onClick(function(){
+//   if(  $(this).hasClass('opened')  ){
+//      $('#').fadeOut();
+//   $(this).removeClass('opened');
+//  }
+//  else{
+//     $('#').fadeIn();
+//   $(this).addClass('opened');
+//  }
+// })

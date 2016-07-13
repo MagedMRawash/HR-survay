@@ -1,12 +1,16 @@
 *:focus {
   outline: none; }
 
+* {
+  border-radius: 0px !important; }
+
 html {
   min-height: 100%; }
 
 body {
   background-color: transparent;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  color: #5da1b4; }
 
 .nav {
   padding-left: 15px; }
@@ -23,7 +27,9 @@ body {
         cursor: default !important;
         background-color: transparent !important;
         border: 0px  !important;
-        border-bottom: 4px solid black !important; }
+        border-bottom: 4px solid #73778c !important; }
+        .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover, .nav-tabs li:focus a, .nav-tabs li:focus a:focus, .nav-tabs li:focus a:hover, .nav-tabs li:hover a, .nav-tabs li:hover a:focus, .nav-tabs li:hover a:hover {
+          color: #a8adc3; }
     .nav-tabs li a {
       text-transform: capitalize;
       border-radius: 0px;
@@ -32,7 +38,7 @@ body {
       padding-left: 0;
       border: 0px;
       border-bottom: 4px solid rgba(0, 0, 0, 0.5);
-      color: black;
+      color: #5da1b4;
       line-height: 2.355;
       text-align: left;
       /* z-index: 64; */ }
@@ -65,12 +71,12 @@ body {
   .tab-content .tab-pane .table-row div[class*="col"] h2, .tab-content .tab-pane .table-row div[class*="col"] span, .tab-content .addList .table-row div[class*="col"] h2, .tab-content .addList .table-row div[class*="col"] span {
     padding: 25px 0px;
     display: block;
-    color: black; }
+    color: #5da1b4; }
   .tab-content .tab-pane .table-row div[class*="col"] h2, .tab-content .addList .table-row div[class*="col"] h2 {
     font-size: 22px;
     line-height: 1.5;
     margin: 0px;
-    font-weight: 400;
+    font-weight: 300;
     padding: 25px 0px 0px; }
     .tab-content .tab-pane .table-row div[class*="col"] h2 .desc-icon, .tab-content .addList .table-row div[class*="col"] h2 .desc-icon {
       margin: 0px 0px 25px; }
@@ -89,20 +95,22 @@ body {
     width: 100%; }
 
 .bg-grad {
-  background: #ffffff;
+  background: #413d56;
   /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(45deg, #ffffff, #e3e5dd);
+  background: -webkit-linear-gradient(135deg, #413d56, #2e414d);
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(45deg, #ffffff, #e3e5dd);
+  background: -o-linear-gradient(135deg, #413d56, #2e414d);
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(45deg, #ffffff, #e3e5dd);
+  background: -moz-linear-gradient(135deg, #413d56, #2e414d);
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(45deg, #ffffff, #e3e5dd);
+  background: linear-gradient(135deg, #413d56, #2e414d);
   /* Standard syntax */ }
 
 header .menu-icon {
   margin-top: 80px;
   font-size: 21px; }
+  header .menu-icon span {
+    color: #e0e0e0; }
 
 .total-hour .time {
   font-size: 150px;
@@ -245,7 +253,7 @@ boot strap hack
   width: 100%; }
 
 .addList .active input:focus {
-  border-color: #555; }
+  border-color: #a8adc3; }
 
 .addList .active .input-div, .addList .active .option-link {
   display: block; }
@@ -316,6 +324,32 @@ boot strap hack
   display: inline-block;
   width: 75px;
   margin-right: 8px; }
+
+section#intro {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%; }
+  section#intro .dropdown {
+    margin: 0 auto;
+    float: none;
+    display: table;
+    width: auto;
+    font-size: x-large;
+    background: #2e3a44;
+    padding: 15px 55px; }
+    section#intro .dropdown #dLabel {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 300; }
+    section#intro .dropdown ul {
+      min-width: 100%; }
+      section#intro .dropdown ul li {
+        min-width: 100%; }
+        section#intro .dropdown ul li a {
+          padding: 15px 55px;
+          min-width: 100%;
+          text-align: center; }
 
 /*=====================================================
 =            Bootstrap 2.3.2 Media Queries            =

@@ -1,6 +1,8 @@
 doctype html
 html.bg-grad(lang='en')
     include ./header.jade
-    body(ng-app="hrsurvay") 
-        include ./body/body.jade
-        include ./footer.jade
+    body(ng-app="hrsurvay" ,ng-controller="HRSurvayController as HRSurvayTasks")
+        include ./body/intro.jade
+        include ./body/hr.jade
+        include ./body/emp.jade
+        include ./footer.jade 

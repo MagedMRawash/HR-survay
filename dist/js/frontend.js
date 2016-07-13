@@ -82,7 +82,7 @@ function clickedOutSide(e, params) {
     var container = params;
     if (!container.is(e.target) // if the target of the click isn't the container...
         && container.has(e.target).length === 0) {
-        return true;
+        return false;
     }
     else {
         return false;
@@ -93,31 +93,13 @@ function clickedOutSide(e, params) {
  * if you opened anther task row then open comment for previus task row you have to click unneeded one more click
  *
  *********************/
-$('#').onClick(function () {
-    if ($(this).hasClass('opened')) {
-        $('#').fadeOut();
-        $(this).removeClass('opened');
-    }
-    else {
-        $('#').fadeIn();
-        $(this).addClass('opened');
-    }
-});
-arrow - to - ;
-do {
-    display: none;
-} while (
-    .hidden - mobile);
-{
-    display: block;
-}
-{
-    arrow - to - ;
-    do {
-        display: inline - block;
-    } while (
-        .hidden - mobile);
-    {
-        display: none;
-    }
-}
+// $('#').onClick(function(){
+//   if(  $(this).hasClass('opened')  ){
+//      $('#').fadeOut();
+//   $(this).removeClass('opened');
+//  }
+//  else{
+//     $('#').fadeIn();
+//   $(this).addClass('opened');
+//  }
+// })

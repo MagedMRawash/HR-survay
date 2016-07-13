@@ -1,6 +1,17 @@
 *:focus {
     outline: none;
+
 }
+
+* {
+    border-radius: 0px !important;
+}
+$pri-color : #5da1b4 ;
+
+
+$tab-border-color: #73778c;
+$border-color: #e0e0e0;
+$link-hover : #a8adc3;
 
 
 html{
@@ -10,6 +21,7 @@ html{
 body {
   background-color: transparent ;
  font-family: 'Roboto', sans-serif;
+ color : $pri-color ;
 }
 .nav {
     padding-left: 15px;
@@ -22,13 +34,16 @@ body {
         margin-right: 0px;
         opacity: .2;
         &.active, &:focus,&:hover{
-            opacity: 1;
+            opacity: 1; 
             a{
             cursor: default !important;
             background-color: transparent !important;
             border: 0px  !important;
-            border-bottom: 4px solid rgba(0, 0, 0, 1) !important;
- 
+            border-bottom: 4px solid $tab-border-color !important;
+                &, &:focus,&:hover{
+                        color : $link-hover;
+                    }
+                    
             }
         }
         a{
@@ -40,7 +55,7 @@ body {
             padding-left: 0;
             border: 0px;
             border-bottom: 4px solid rgba(0, 0, 0, 0.5);
-            color: black;
+            color: $pri-color ;
             line-height: 2.355;
             text-align: left;
             /* z-index: 64; */
@@ -87,14 +102,14 @@ body {
         h2,span{
                 padding: 25px 0px;
                 display: block; 
-                color: rgb(0, 0, 0);
+                color: $pri-color ;
                 
         } 
         h2 {
                 font-size: 22px;
                 line-height: 1.5;
                 margin: 0px;
-                font-weight: 400;
+                font-weight: 300;
                 padding: 25px 0px 0px;
                
          .desc-icon{
@@ -122,16 +137,29 @@ body {
     }
 }
 
-$Fcolor : #ffffff;
-$Scolor : #e3e5dd ;
-$deg : 45deg;
 
-.bg-grad {
+// $Fcolor : #ffffff;
+// $Scolor : #e3e5dd ;
+// $deg : 45deg;
+
+
+$HRFcolor : #413d56; 
+// #4c3d56;
+$HRScolor : #2e414d ;
+$HRdeg : 135deg;
+
+
+@mixin gradiant($Fcolor , $Scolor , $deg) {
   background: $Fcolor; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient($deg, $Fcolor , $Scolor); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient($deg, $Fcolor, $Scolor); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient($deg,$Fcolor, $Scolor); /* For Firefox 3.6 to 15 */
   background: linear-gradient($deg, $Fcolor , $Scolor); /* Standard syntax */
+  }
+
+
+.bg-grad {
+@include  gradiant($HRFcolor , $HRScolor , $HRdeg) ;
 }
 
 
@@ -139,6 +167,9 @@ header{
     .menu-icon {
         margin-top: 80px;
         font-size: 21px;
+        span {
+            color : $border-color;
+        }
     } 
 }
 
@@ -207,9 +238,6 @@ boot strap hack
 
 
 
-
-
-$border-color: #e0e0e0;
 
 *,*:before,*:after{
   box-sizing: border-box;
@@ -416,7 +444,7 @@ font-weight: 700;
             width: 100%;
         } 
         input:focus { 
-            border-color:#555;  
+            border-color:$link-hover;  
 
         }
         
@@ -519,5 +547,39 @@ font-weight: 700;
         width: 75px;
         margin-right: 8px;
  }
+
+
+ section#intro{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            
+    .dropdown{
+            margin: 0 auto;
+            float: none;
+            display: table;
+            width: auto;
+            font-size: x-large;
+            background: #2e3a44;
+            padding: 15px 55px;
+            #dLabel{
+            color: $border-color;
+            text-decoration: none;
+            font-weight: 300;
+            }
+            ul{
+                min-width: 100%;
+            li{
+                min-width: 100%;
+                a{
+                padding: 15px 55px;
+                min-width: 100%;
+                text-align: center;
+            }
+            }
+            }
+            }
+    }
 @import 'responsive.scss'; 
 
