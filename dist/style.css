@@ -39,7 +39,7 @@ body {
       padding-left: 0;
       border: 0px;
       border-bottom: 4px solid rgba(0, 0, 0, 0.5);
-      color: #5da1b4;
+      color: #8e84bd;
       line-height: 2.355;
       text-align: left;
       /* z-index: 64; */ }
@@ -54,7 +54,7 @@ body {
         display: inline-block; }
 
 .tab-content:hover .table-row {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #444267;
   opacity: 0.6; }
   .tab-content:hover .table-row.active {
     opacity: 1; }
@@ -62,10 +62,12 @@ body {
       color: #444152 !important; }
 
 .tab-content .tab-pane .table-row, .tab-content .addList .table-row {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #444267 !important;
   -webkit-transition: all .2s;
   /* Safari 3.1 to 6.0 */
   transition: all .2s; }
+  .tab-content .tab-pane .table-row.active h2, .tab-content .tab-pane .table-row.active span, .tab-content .addList .table-row.active h2, .tab-content .addList .table-row.active span {
+    color: #444152 !important; }
   .tab-content .tab-pane .table-row:hover, .tab-content .addList .table-row:hover {
     opacity: 1; }
   .tab-content .tab-pane .table-row a, .tab-content .addList .table-row a {
@@ -74,7 +76,7 @@ body {
   .tab-content .tab-pane .table-row div[class*="col"] h2, .tab-content .tab-pane .table-row div[class*="col"] span, .tab-content .addList .table-row div[class*="col"] h2, .tab-content .addList .table-row div[class*="col"] span {
     padding: 25px 0px;
     display: block;
-    color: #5da1b4; }
+    color: #8e84bd; }
   .tab-content .tab-pane .table-row div[class*="col"] h3, .tab-content .addList .table-row div[class*="col"] h3 {
     font-size: 16px;
     margin: 0px;
@@ -84,7 +86,8 @@ body {
   .tab-content .tab-pane .table-row div[class*="col"] h2, .tab-content .addList .table-row div[class*="col"] h2 {
     font-size: 22px;
     margin: 0px;
-    font-weight: 300; }
+    font-weight: 300;
+    color: #fff; }
     .tab-content .tab-pane .table-row div[class*="col"] h2 .desc-icon, .tab-content .addList .table-row div[class*="col"] h2 .desc-icon {
       margin: 0px 0px 0px; }
   .tab-content .tab-pane .table-row div[class*="col"] .date, .tab-content .addList .table-row div[class*="col"] .date {
@@ -115,11 +118,12 @@ body {
 
 header .menu-icon {
   margin-top: 80px;
-  font-size: 21px; }
+  font-size: 21px;
+  color: #8e84bd; }
   header .menu-icon span {
-    color: #e0e0e0; }
+    color: #444267; }
 
-.total-hour .time {
+.time {
   font-size: 150px;
   float: right;
   font-weight: lighter;
@@ -130,12 +134,17 @@ header .menu-icon {
   margin-top: -50px;
   position: relative;
   z-index: -1; }
-  .total-hour .time span {
+  .time span {
     font-size: 20px; }
 
 /*
 boot strap hack 
 */
+h1.time {
+  font-size: 60px;
+  text-align: left;
+  float: left; }
+
 .no-gutter > [class*='col-'] {
   padding-right: 0;
   padding-left: 0; }
@@ -310,7 +319,7 @@ boot strap hack
     /* For Firefox 3.6 to 15 */
     background: linear-gradient(135deg, #413d56, #2d5873);
     /* Standard syntax */ }
-  .addList button:hover, .addList button:focus {
+  .addList button:hover {
     color: #fff;
     padding: 12px 75px; }
   .addList button:active {
@@ -369,14 +378,14 @@ section#intro {
     margin: 0 auto;
     float: none;
     display: table;
-    width: auto;
-    font-size: x-large;
-    background: #2e3a44;
-    padding: 15px 55px; }
+    width: auto; }
     section#intro .dropdown #dLabel {
-      color: #e0e0e0;
+      font-size: x-large;
+      background: #2e3a44;
+      padding: 15px 55px;
+      color: #fff;
       text-decoration: none;
-      font-weight: 300; }
+      font-weight: 100; }
     section#intro .dropdown ul {
       min-width: 100%; }
       section#intro .dropdown ul li {
@@ -388,6 +397,10 @@ section#intro {
 
 .dropdown-menu {
   min-width: 100%; }
+
+.total-hour .container {
+  width: 260px;
+  float: right; }
 
 /*=====================================================
 =            Bootstrap 2.3.2 Media Queries            =

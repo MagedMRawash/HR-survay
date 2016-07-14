@@ -6,13 +6,25 @@
 * {
     border-radius: 0px !important;
 }
-$pri-color : #5da1b4 ;
+
+
+$pri-color : rgb(142, 132, 189);  // #5da1b4 ;
 
 
 $tab-border-color: #73778c;
-$border-color: #e0e0e0;
+$border-color: #444267 ; // #e0e0e0;
+
 $link-hover : #a8adc3;
 $font-color : #444152; 
+
+
+
+$HRFcolor : #413d56; 
+$HRScolor : #2e414d ;
+$HRdeg : 135deg;
+$HRScolorLight :  #2d5873;
+
+
 
 html{
   min-height: 100%;
@@ -79,21 +91,26 @@ font-weight: 300;
 .tab-content{
     &:hover{
         .table-row{
-            border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+            border-bottom: 2px solid $border-color;
             opacity: 0.6;
             &.active {
                 opacity: 1;
                   h2,span{
                         color: $font-color !important  ;
                         }      
-            }
+            } 
     }
       }
     .tab-pane , .addList{
         .table-row{
-            border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+            border-bottom: 2px solid #444267 !important;
             -webkit-transition: all .2s; /* Safari 3.1 to 6.0 */
             transition: all .2s;
+            &.active {
+                  h2,span{
+                        color: $font-color !important  ;
+                        }      
+            } 
             &:hover{
                 // background-color: rgba(0, 0, 0, 0.03);
                 opacity: 1;
@@ -125,6 +142,7 @@ font-weight: 300;
                 margin: 0px;
                 font-weight: 300;
                 // padding: 15px 0px 0px;
+                color: #fff;
                
          .desc-icon{
                       margin:   0px 0px 0px;
@@ -156,13 +174,6 @@ font-weight: 300;
 // $Scolor : #e3e5dd ;
 // $deg : 45deg;
 
-
-$HRFcolor : #413d56; 
-// #4c3d56;
-$HRScolor : #2e414d ;
-$HRdeg : 135deg;
-$HRScolorLight :  #2d5873;
-
 @mixin gradiant($Fcolor , $Scolor , $deg) {
   background: $Fcolor; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient($deg, $Fcolor , $Scolor); /* For Safari 5.1 to 6.0 */
@@ -181,13 +192,14 @@ header{
     .menu-icon {
         margin-top: 80px;
         font-size: 21px;
+        color: $pri-color;
         span {
             color : $border-color;
         }
     } 
 }
 
-.total-hour{
+
     .time{
         font-size: 150px;
         float: right;
@@ -203,11 +215,16 @@ header{
     span{
         font-size: 20px;
     }
-}}
+}
 /*
 boot strap hack 
 */
 
+h1.time {
+    font-size: 60px;
+    text-align: left;
+    float: left;
+}
 
 .no-gutter > [class*='col-'] {
     padding-right:0;
@@ -508,7 +525,7 @@ font-weight: 700;
 
     }
 
-        &:hover, &:focus {
+        &:hover {
         // @include  gradiant($HRScolorLight , $HRFcolor , $HRdeg) ;
             color: #fff;
             padding: 12px 75px;
@@ -598,13 +615,15 @@ font-weight: 700;
             float: none;
             display: table;
             width: auto;
+            #dLabel{
+
             font-size: x-large;
             background: #2e3a44;
+            // @include  gradiant( $HRScolorLight , $HRFcolor ,  $HRdeg) ;
             padding: 15px 55px;
-            #dLabel{
-            color: $border-color;
+            color: #fff ;
             text-decoration: none;
-            font-weight: 300;
+            font-weight: 100;
             }
             ul{
                 min-width: 100%;
@@ -623,6 +642,15 @@ font-weight: 700;
 
     .dropdown-menu{
         min-width: 100%;
+    }
+
+
+
+    .total-hour{
+        .container{
+                width: 260px;
+    float: right;
+        }
     }
 @import 'responsive.scss'; 
 

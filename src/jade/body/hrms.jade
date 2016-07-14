@@ -45,7 +45,7 @@
                                 | Add to this list
                         .col-md-12.input-div
                             input(data-target="#", type="text",placeholder="What you Would like to Ask about ? ", ng-model="newSurv.Title", required ,name="title" )  
-                        .col-md-12.error(ng-show=" ( msForm.title.$touched &&  msForm.title.$error.required  )  || submitedtitle ")  Please enter a valid title.                         
+                        .col-md-12.error(ng-show=" ( msForm.title.$touched &&  msForm.title.$error.required  )  || mssubmitedtitle ")  Please enter a valid title.                         
                         .col-md-12.option-link
                             .row 
                                 .col-md-6
@@ -61,10 +61,7 @@
                                                         li(ng-repeat="mq in phases.mq[1]")
                                                             a.hr(href="#", ng-click=" newSurv.Qlist.push(mq) ") {% mq.title %}
                                                 .row 
-                                                    .col-md-12.error(ng-show="submitedQlist ")  Please enter a valid date. 
-                                                     
-                                            .hidden-div
-                                                | The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.
+                                                    .col-md-12.error(ng-show=" mssubmitedQlist ")  Please enter a valid date. 
                                 .col-md-6
                                     .row 
                                         .col-md-1.col-sm-1.col-xs-2
@@ -78,18 +75,18 @@
                                                         li(ng-repeat="mts in phases.mts[1]")
                                                             a.hr(href="#", ng-click=" newSurv.Tlist.push(mts) ") {% mts.title %} 
                                                 .row 
-                                                    .col-md-12.error(ng-show=" submitedTlist ")  Please enter a valid date. 
+                                                    .col-md-12.error(ng-show=" mssubmitedTlist ")  Please enter a valid date. 
                                 .col-md-12
                                     .row
                                         .col-md-4.col-xs-6.col-sm-6
                                             input.init-score(type="date",placeholder="Start From ",ng-model="newSurv.from" , name="from" , required) 
                                             .row 
-                                                .col-md-12.error(ng-show="( msForm.from.$touched &&  msForm.from.$error.required  ) || submitedfrom")  Please enter a valid date.                         
+                                                .col-md-12.error(ng-show="( msForm.from.$touched &&  msForm.from.$error.required  ) || mssubmitedfrom")  Please enter a valid date.                         
 
                                         .col-md-4.col-xs-6.col-sm-6
                                             input.init-score(type="date",placeholder="End At",ng-model="newSurv.to", name="to" , required) 
                                             .row 
-                                                .col-md-12.error(ng-show="( msForm.to.$touched &&  msForm.to.$error.required  ) || submitedto ")  Please enter a valid date.                         
+                                                .col-md-12.error(ng-show="( msForm.to.$touched &&  msForm.to.$error.required  ) || mssubmitedto ")  Please enter a valid date.                         
                                        .col-md-4.pull-right
                                             button.btn.btn-defulte(type="button", ng-click="addSurvay(newSurv)") Submit 
                                 

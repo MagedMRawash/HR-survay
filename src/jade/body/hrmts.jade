@@ -11,8 +11,7 @@
                                 .col-md-12
                                     h3 Departments
                             .row
-                                .col-md-2.col-xs-3(ng-repeat=" dLItem in item.departs ")
-                                    {% dLItem%}      
+                                .col-md-2.col-xs-3(ng-repeat=" dLItem in item.departs ") {% dLItem%}      
                         
                                                         
                                                 
@@ -23,13 +22,14 @@
                 .close.col-md-12
                         .icon.pull-right
                 .col-md-12
-                    form.row
+                    form.row(name="mtsForm")
                         .col-md-12
                             h2 
                                 span +  
                                 | Add to this list
                         .col-md-12.input-div
-                            input(data-target="#", href="#",placeholder="What you Would like to Ask about ? ", ng-model="newTarget.Title")  
+                            input(data-target="#", type="text",placeholder="What you Would like to Ask about ? ", ng-model="newTarget.Title",name="title", required)
+                        .col-md-12.error(ng-show=" ( mtsForm.title.$touched &&  mtsForm.title.$error.required  )  || mtssubmitedtitle ")  Please enter a  Targeted Sector title .                         
                         .col-md-12.option-link
                             .row 
                                 .col-md-6
@@ -44,12 +44,12 @@
                                                     ul.dropdown-menu(aria-labelledby='QuesType')
                                                         li(ng-repeat="dItem in departmentsList")
                                                             a.hr(href="#", ng-click=" newTarget.departs.push(dItem) ") {% dItem %}
-                                            .hidden-div
-                                                | The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.
+                                                .row 
+                                                    .col-md-12.error(ng-show=" mtssubmiteddeparts ")  Please enter a valid date. 
                                 .col-md-12
                                     .row
                                        .col-md-3.pull-right
-                                    button.btn.btn-defulte(type="button", ng-click="addSurvay(newTarget)") Submit 
+                                    button.btn.btn-defulte(type="button", ng-click="addTargetedSector(newTarget)") Submit 
                                 
                 
  

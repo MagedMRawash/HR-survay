@@ -85,13 +85,14 @@
                             <div class="icon pull-right"></div>
                           </div>
                           <div class="col-md-12">
-                            <form class="row">
+                            <form name="mqForm" class="row">
                               <div class="col-md-12">
                                 <h2> <span>+  </span>Add to this list</h2>
                               </div>
                               <div class="col-md-12 input-div">
-                                <input data-target="#" href="#" placeholder="What you Would like to Ask about ? " ng-model="newQues.Title">
+                                <input type="text" placeholder="What you Would like to Ask about ? " ng-model="newQues.Title" name="title" required>
                               </div>
+                              <div ng-show=" ( mqForm.title.$touched &amp;&amp;  mqForm.title.$error.required  )  || mqsubmitedtitle " class="col-md-12 error"> Please enter a Question .                         </div>
                               <div class="col-md-12 option-link">
                                 <div class="row"> 
                                   <div class="col-md-9">
@@ -108,15 +109,20 @@
                                             <li><a href="#" ng-click=" newQues.Type  = 3 ;  newQues.Text  = 'Multiple Selection' " class="emp"> Multiple Selection</a></li>
                                           </ul>
                                         </div>
+                                        <div class="row"> 
+                                          <div ng-show="mqsubmitedType " class="col-md-12 error"> Please chose Question Type </div>
+                                        </div>
                                       </div>
-                                      <div class="hidden-div">The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.</div>
                                     </div>
                                     <div class="row">
                                       <div class="col-md-1 col-sm-1 col-xs-2">
                                         <div class="person-icon"></div>
                                       </div>
                                       <div class="col-md-11 col-xs-10 col-sm-11">
-                                        <input data-target="#" href="#" placeholder="Question Score " ng-model="newQues.Score" class="init-score">
+                                        <input tybe="number" placeholder="Question Score " ng-model="newQues.Score" name="score" required class="init-score">
+                                        <div class="row"> 
+                                          <div ng-show="( mqForm.score.$touched &amp;&amp;  mqForm.score.$error.required  &amp;&amp; (mqForm.score.$viewValue &gt; 0  ? (mqForm.score.$viewValue  &lt;= 10 ?  false : true ) : true ) ) || mqsubmitedscore " class="col-md-12 error"> Please enter a Score between 0 & 10                         </div>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -196,7 +202,7 @@
                               <div class="col-md-12 input-div">
                                 <input data-target="#" type="text" placeholder="What you Would like to Ask about ? " ng-model="newSurv.Title" required name="title">
                               </div>
-                              <div ng-show=" ( msForm.title.$touched &amp;&amp;  msForm.title.$error.required  )  || submitedtitle " class="col-md-12 error"> Please enter a valid title.                         </div>
+                              <div ng-show=" ( msForm.title.$touched &amp;&amp;  msForm.title.$error.required  )  || mssubmitedtitle " class="col-md-12 error"> Please enter a valid title.                         </div>
                               <div class="col-md-12 option-link">
                                 <div class="row"> 
                                   <div class="col-md-6">
@@ -212,10 +218,9 @@
                                           </ul>
                                         </div>
                                         <div class="row"> 
-                                          <div ng-show="submitedQlist " class="col-md-12 error"> Please enter a valid date. </div>
+                                          <div ng-show=" mssubmitedQlist " class="col-md-12 error"> Please enter a valid date. </div>
                                         </div>
                                       </div>
-                                      <div class="hidden-div">The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.</div>
                                     </div>
                                   </div>
                                   <div class="col-md-6">
@@ -231,7 +236,7 @@
                                           </ul>
                                         </div>
                                         <div class="row"> 
-                                          <div ng-show=" submitedTlist " class="col-md-12 error"> Please enter a valid date. </div>
+                                          <div ng-show=" mssubmitedTlist " class="col-md-12 error"> Please enter a valid date. </div>
                                         </div>
                                       </div>
                                     </div>
@@ -241,13 +246,13 @@
                                       <div class="col-md-4 col-xs-6 col-sm-6">
                                         <input type="date" placeholder="Start From " ng-model="newSurv.from" name="from" required class="init-score">
                                         <div class="row"> 
-                                          <div ng-show="( msForm.from.$touched &amp;&amp;  msForm.from.$error.required  ) || submitedfrom" class="col-md-12 error"> Please enter a valid date.                         </div>
+                                          <div ng-show="( msForm.from.$touched &amp;&amp;  msForm.from.$error.required  ) || mssubmitedfrom" class="col-md-12 error"> Please enter a valid date.                         </div>
                                         </div>
                                       </div>
                                       <div class="col-md-4 col-xs-6 col-sm-6">
                                         <input type="date" placeholder="End At" ng-model="newSurv.to" name="to" required class="init-score">
                                         <div class="row"> 
-                                          <div ng-show="( msForm.to.$touched &amp;&amp;  msForm.to.$error.required  ) || submitedto " class="col-md-12 error"> Please enter a valid date.                         </div>
+                                          <div ng-show="( msForm.to.$touched &amp;&amp;  msForm.to.$error.required  ) || mssubmitedto " class="col-md-12 error"> Please enter a valid date.                         </div>
                                         </div>
                                       </div>
                                     </div>
@@ -296,13 +301,14 @@
                             <div class="icon pull-right"></div>
                           </div>
                           <div class="col-md-12">
-                            <form class="row">
+                            <form name="mtsForm" class="row">
                               <div class="col-md-12">
                                 <h2> <span>+  </span>Add to this list</h2>
                               </div>
                               <div class="col-md-12 input-div">
-                                <input data-target="#" href="#" placeholder="What you Would like to Ask about ? " ng-model="newTarget.Title">
+                                <input data-target="#" type="text" placeholder="What you Would like to Ask about ? " ng-model="newTarget.Title" name="title" required>
                               </div>
+                              <div ng-show=" ( mtsForm.title.$touched &amp;&amp;  mtsForm.title.$error.required  )  || mtssubmitedtitle " class="col-md-12 error"> Please enter a  Targeted Sector title .                         </div>
                               <div class="col-md-12 option-link">
                                 <div class="row"> 
                                   <div class="col-md-6">
@@ -317,15 +323,17 @@
                                             <li ng-repeat="dItem in departmentsList"><a href="#" ng-click=" newTarget.departs.push(dItem) " class="hr">{% dItem %}</a></li>
                                           </ul>
                                         </div>
+                                        <div class="row"> 
+                                          <div ng-show=" mtssubmiteddeparts " class="col-md-12 error"> Please enter a valid date. </div>
+                                        </div>
                                       </div>
-                                      <div class="hidden-div">The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.</div>
                                     </div>
                                   </div>
                                   <div class="col-md-12">
                                     <div class="row">
                                       <div class="col-md-3 pull-right"></div>
                                     </div>
-                                    <button type="button" ng-click="addSurvay(newTarget)" class="btn btn-defulte">Submit </button>
+                                    <button type="button" ng-click="addTargetedSector(newTarget)" class="btn btn-defulte">Submit </button>
                                   </div>
                                 </div>
                               </div>
@@ -358,7 +366,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <div class="time">63<span> Hours</span></div>
+              <div class="time">63<span> Score</span></div>
             </div>
           </div>
         </div>
@@ -367,99 +375,26 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <!-- Nav tabs-->
-              <ul role="tablist" class="nav nav-tabs row no-gutter">
-                <li role="presentation" ng-repeat="(key , phase) in HRSurvayTasks.phases " class="col-md-3 col-sm-3 col-xs-12 {%$index ==0 ? 'active': ''%}"><a href="#{%key%}" aria-controls="{%key%}" role="tab" data-toggle="tab">{%phase[0]%}<span>{%phase[1].length%}</span></a></li>
-              </ul>
-              <!-- Tab panes-->
+              <h1 class="time"> {%  phases.ms[1][0].title %}</h1>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Tab panes-->
+            <div class="col-md-12">
               <div class="tab-content">
-                <div role="tabpanel" ng-repeat="(key , phase) in HRSurvayTasks.phases " id="{%key%}" class="tab-pane fade in {%$index ==0 ? 'active': ''%}"> 
-                  <div ng-repeat="task in phase[1] " class="row table-row no-gutter accordion-item">
-                    <!-- a.col-md-12(role='button', data-toggle='collapse', href='#{%key + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')--><a href="#{%key + $index%} " class="col-md-12 accordion-child">
+                <div role="tabpanel" id="mq" class="tab-pane fade in  active">
+                  <div ng-repeat="task in phases.ms[1][0].Qlist " class="row table-row no-gutter accordion-item"><a class="col-md-12 accordion-child">
                       <div class="row">
                         <div class="col-md-10 col-xs-8">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2>{%task.title%} <span class="desc-icon"></span></h2>
+                              <h2>{%task.title%} 
+                              </h2>
                             </div>
                             <div class="col-md-12 description">
                               <p>  {%task.description%} </p>
                             </div>
-                            <div class="col-md-12 estimate">
-                              <p>Estimate: 40 Hours</p>
-                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-1 col-xs-2"> 
-                          <button ng-show="{%task.isComment%}" type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="" class="comment"></button>
-                          <div class="PopupCont-comment"> 
-                            <div class="close col-md-12">
-                              <div class="icon pull-right"></div>
-                            </div>
-                            <div class="row com-row first">
-                              <div class="col-md-12"><span class="name">Martin Legrand</span><span class="date">April 13 at 4:49pm</span></div>
-                              <div class="col-md-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod non nibh quis aliquam. Maecenas ornare at felis vitae luctus.</div>
-                            </div>
-                            <div class="row com-row">
-                              <div class="col-md-12"><span class="name">Martin Legrand</span><span class="date">April 13 at 4:49pm</span></div>
-                              <div class="col-md-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod non nibh quis aliquam. Maecenas ornare at felis vitae luctus.</div>
-                            </div>
-                            <div class="row">
-                              <textarea placeholder="Leave a comment" class="col-md-12"></textarea>
-                              <div class="col-md-12 pull-right">
-                                <button type="button" class="btn btn-defulte">Send </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-1 col-xs-2"><span class="date"> {%task.date%} </span></div>
-                      </div></a>
-                  </div>
-                </div>
-                <div id="" class="addList"> 
-                  <div class="row table-row no-gutter accordion-item"><a class="col-md-12 accordion-child">
-                      <div class="row">
-                        <div class="close col-md-12">
-                          <div class="icon pull-right"></div>
-                        </div>
-                        <div class="col-md-12">
-                          <form class="row">
-                            <div class="col-md-12">
-                              <h2> <span>+  </span>Add to this list</h2>
-                            </div>
-                            <div class="col-md-12 input-div">
-                              <input type="text" placeholder="What you Would like to get done ">
-                            </div>
-                            <div class="col-md-12 option-link">
-                              <div class="row">
-                                <div class="col-md-9">
-                                  <div class="row">
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                      <div class="desc-icon"></div>
-                                    </div>
-                                    <div class="col-md-11 col-xs-10 col-sm-11">
-                                      <div class="init-link">Share More Details</div>
-                                      <div class="hidden-div">The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.</div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                      <div class="person-icon"></div>
-                                    </div>
-                                    <div class="col-md-11 col-xs-10 col-sm-11">
-                                      <div class="init-link">Enter Your Name</div>
-                                      <div class="hidden-div">
-                                        <input type="text" placeholder="Enter Your Name ">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-3 pull-right">
-                                  <button type="button" class="btn btn-defulte">Submit </button>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
                         </div>
                       </div></a></div>
                 </div>
