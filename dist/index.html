@@ -18,7 +18,7 @@
     script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
     -->
   </head>
-  <body ng-app="hrsurvay" ng-controller="HRSurvayController as HRSurvayTasks">
+  <body ng-app="hrsurvay" ng-controller="HRSurvayController as HRSurvayQues">
     <section id="intro" ng-hide="introShow">
       <div class="dropdown"><a id="dLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Personas<span class="caret"></span></a>
         <ul aria-labelledby="dLabel" class="dropdown-menu">
@@ -48,105 +48,293 @@
           </div>
         </div>
       </section>
-      <section class="tasks">
+      <section class="Ques">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
               <!-- Nav tabs-->
               <ul role="tablist" class="nav nav-tabs row no-gutter">
-                <li role="presentation" ng-repeat="(key , phase) in HRSurvayTasks.phases " class="col-md-3 col-sm-3 col-xs-12 &lt;%$index ==0 ? 'active': ''%&gt;"><a href="#&lt;%key%&gt;" aria-controls="&lt;%key%&gt;" role="tab" data-toggle="tab"><%phase[0]%><span><%phase[1].length%></span></a></li>
+                <li role="presentation" ng-repeat="(key , phase) in phases " class="col-md-3 col-sm-3 col-xs-12 {%$index ==0 ? 'active': ''%}"><a href="#{%key%}" aria-controls="{%key%}" role="tab" data-toggle="tab">{%phase[0]%}<span>{%phase[1].length%}</span></a></li>
               </ul>
               <!-- Tab panes-->
               <div class="tab-content">
-                <div role="tabpanel" ng-repeat="(key , phase) in HRSurvayTasks.phases " id="&lt;%key%&gt;" class="tab-pane fade in &lt;%$index ==0 ? 'active': ''%&gt;"> 
-                  <div ng-repeat="task in phase[1] " class="row table-row no-gutter accordion-item">
-                    <!-- a.col-md-12(role='button', data-toggle='collapse', href='#<%key + $index%> ', aria-expanded='false', aria-controls='<%key + $index%>  ')--><a href="#&lt;%key + $index%&gt; " class="col-md-12 accordion-child">
+                <div role="tabpanel" id="mq" class="tab-pane fade in  active">
+                  <div ng-repeat="ques in phases.mq[1] " class="row table-row no-gutter accordion-item">
+                    <!-- a.col-md-12(role='button', data-toggle='collapse', href='#{% 'ms' + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')--><a href="#{% 'ms' + $index%}" class="col-md-12 accordion-child"> 
                       <div class="row">
-                        <div class="col-md-10 col-xs-8">
+                        <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2><%task.title%> <span class="desc-icon"></span></h2>
+                              <h2>{%ques.title%} <span class="desc-icon"></span></h2>
                             </div>
-                            <div class="col-md-12 description">
-                              <p>  <%task.description%> </p>
+                            <div class="col-md-12 quesType">
+                              <div question-type q-type="ques"> </div>
                             </div>
-                            <div class="col-md-12 estimate">
-                              <p>Estimate: 40 Hours</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-1 col-xs-2"> 
-                          <button ng-show="&lt;%task.isComment%&gt;" type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="" class="comment"></button>
-                          <div class="PopupCont-comment"> 
-                            <div class="close col-md-12">
-                              <div class="icon pull-right"></div>
-                            </div>
-                            <div class="row com-row first">
-                              <div class="col-md-12"><span class="name">Martin Legrand</span><span class="date">April 13 at 4:49pm</span></div>
-                              <div class="col-md-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod non nibh quis aliquam. Maecenas ornare at felis vitae luctus.</div>
-                            </div>
-                            <div class="row com-row">
-                              <div class="col-md-12"><span class="name">Martin Legrand</span><span class="date">April 13 at 4:49pm</span></div>
-                              <div class="col-md-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod non nibh quis aliquam. Maecenas ornare at felis vitae luctus.</div>
-                            </div>
-                            <div class="row">
-                              <textarea placeholder="Leave a comment" class="col-md-12"></textarea>
-                              <div class="col-md-12 pull-right">
-                                <button type="button" class="btn btn-defulte">Send </button>
-                              </div>
+                            <div ng-show="hrin" class="col-md-12 score">
+                              <p>Score : {% ques.score %}</p>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-1 col-xs-2"><span class="date"> <%task.date%> </span></div>
                       </div></a>
                   </div>
-                </div>
-                <div id="" class="addList"> 
-                  <div class="row table-row no-gutter accordion-item"><a class="col-md-12 accordion-child">
-                      <div class="row">
-                        <div class="close col-md-12">
-                          <div class="icon pull-right"></div>
-                        </div>
-                        <div class="col-md-12">
-                          <form class="row">
-                            <div class="col-md-12">
-                              <h2> <span>+  </span>Add to this list</h2>
-                            </div>
-                            <div class="col-md-12 input-div">
-                              <input type="text" placeholder="What you Would like to get done ">
-                            </div>
-                            <div class="col-md-12 option-link">
-                              <div class="row">
-                                <div class="col-md-9">
-                                  <div class="row">
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                      <div class="desc-icon"></div>
-                                    </div>
-                                    <div class="col-md-11 col-xs-10 col-sm-11">
-                                      <div class="init-link">Share More Details</div>
+                  <div id="" class="addList"> 
+                    <div class="row table-row no-gutter accordion-item">
+                      <div class="col-md-12 accordion-child">
+                        <div class="row">
+                          <div class="close col-md-12">
+                            <div class="icon pull-right"></div>
+                          </div>
+                          <div class="col-md-12">
+                            <form class="row">
+                              <div class="col-md-12">
+                                <h2> <span>+  </span>Add to this list</h2>
+                              </div>
+                              <div class="col-md-12 input-div">
+                                <input data-target="#" href="#" placeholder="What you Would like to Ask about ? " ng-model="newQues.Title">
+                              </div>
+                              <div class="col-md-12 option-link">
+                                <div class="row"> 
+                                  <div class="col-md-9">
+                                    <div class="row">
+                                      <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <div class="desc-icon"></div>
+                                      </div>
+                                      <div class="col-md-11 col-xs-10 col-sm-11">
+                                        <div class="dropdown"><a id="QuesType" type="button" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <div class="init-score">{% newQues.Text || ' Chose your Question type ' %}</div><span class="caret"></span></a>
+                                          <ul aria-labelledby="QuesType" class="dropdown-menu">
+                                            <li><a href="#" ng-click=" newQues.Type  = 1 ;  newQues.Text  = 'Yes || No' " class="hr">Yes || No</a></li>
+                                            <li><a href="#" ng-click=" newQues.Type  = 2 ;  newQues.Text  = 'Single Selection' " class="emp"> Single Selection</a></li>
+                                            <li><a href="#" ng-click=" newQues.Type  = 3 ;  newQues.Text  = 'Multiple Selection' " class="emp"> Multiple Selection</a></li>
+                                          </ul>
+                                        </div>
+                                      </div>
                                       <div class="hidden-div">The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.</div>
                                     </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                      <div class="person-icon"></div>
-                                    </div>
-                                    <div class="col-md-11 col-xs-10 col-sm-11">
-                                      <div class="init-link">Enter Your Name</div>
-                                      <div class="hidden-div">
-                                        <input type="text" placeholder="Enter Your Name ">
+                                    <div class="row">
+                                      <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <div class="person-icon"></div>
+                                      </div>
+                                      <div class="col-md-11 col-xs-10 col-sm-11">
+                                        <input data-target="#" href="#" placeholder="Question Score " ng-model="newQues.Score" class="init-score">
                                       </div>
                                     </div>
                                   </div>
+                                  <div class="col-md-3 pull-right">
+                                    <button type="button" ng-click="addQuestion(newQues)" class="btn btn-defulte">Submit </button>
+                                  </div>
                                 </div>
-                                <div class="col-md-3 pull-right">
-                                  <button type="button" class="btn btn-defulte">Submit </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" id="ms" class="tab-pane fade in">                           
+                  <div ng-repeat="ques in phases.ms[1] " class="row table-row no-gutter accordion-item">
+                    <div class="col-md-12 accordion-child">
+                      <!--( href="#{% 'mq' + $index%} ")-->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h2>{%ques.title%} <span class="desc-icon"></span></h2>
+                            </div>
+                            <div class="col-md-8 MQTitle">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <h3>Questions</h3>
+                                </div>
+                              </div>
+                              <div ng-repeat=" mq in ques.Qlist " class="row">
+                                <div class="col-md-12">{% mq.title %}      </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4 mtsTitle">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <h3>Target Users</h3>
+                                </div>
+                              </div>
+                              <div ng-repeat=" mts in ques.Tlist " class="row">
+                                <div class="col-md-12">{% mts.title %}                                    </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <h3>Duration</h3>
+                                </div>
+                                <div class="col-md-6 score">
+                                  <p>From : {% ques.from %}   </p>
+                                </div>
+                                <div class="col-md-6 score">
+                                  <p>To : {% ques.to %}   </p>
+                                </div>
+                                <div class="col-md-12 score">
+                                  <p>Grade : {% ques.ScoreTargetedRanges  %}   </p>
                                 </div>
                               </div>
                             </div>
-                          </form>
+                          </div>
                         </div>
-                      </div></a></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="" class="addList"> 
+                    <div class="row table-row no-gutter accordion-item">
+                      <div class="col-md-12 accordion-child">
+                        <div class="row">
+                          <div class="close col-md-12">
+                            <div class="icon pull-right"></div>
+                          </div>
+                          <div class="col-md-12">
+                            <form name="msForm" class="row">
+                              <div class="col-md-12">
+                                <h2> <span>+  </span>Add to this list</h2>
+                              </div>
+                              <div class="col-md-12 input-div">
+                                <input data-target="#" type="text" placeholder="What you Would like to Ask about ? " ng-model="newSurv.Title" required name="title">
+                              </div>
+                              <div ng-show=" ( msForm.title.$touched &amp;&amp;  msForm.title.$error.required  )  || submitedtitle " class="col-md-12 error"> Please enter a valid title.                         </div>
+                              <div class="col-md-12 option-link">
+                                <div class="row"> 
+                                  <div class="col-md-6">
+                                    <div class="row"> 
+                                      <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <div class="desc-icon"></div>
+                                      </div>
+                                      <div class="col-md-11 col-xs-10 col-sm-11">
+                                        <div class="dropdown"><a id="QuesType" ng-click="   newSurv.Qlist = newSurv.Qlist || [] " href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <div class="init-score">{% ' Chose your Question from list ' %}</div><span class="caret"></span></a>
+                                          <ul aria-labelledby="QuesType" class="dropdown-menu">
+                                            <li ng-repeat="mq in phases.mq[1]"><a href="#" ng-click=" newSurv.Qlist.push(mq) " class="hr">{% mq.title %}</a></li>
+                                          </ul>
+                                        </div>
+                                        <div class="row"> 
+                                          <div ng-show="submitedQlist " class="col-md-12 error"> Please enter a valid date. </div>
+                                        </div>
+                                      </div>
+                                      <div class="hidden-div">The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.</div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="row"> 
+                                      <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <div class="desc-icon"></div>
+                                      </div>
+                                      <div class="col-md-11 col-xs-10 col-sm-11">
+                                        <div class="dropdown"><a id="QuesType" ng-click="   newSurv.Tlist = newSurv.Tlist || [] " href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <div class="init-score">{% ' Chose your Question from list ' %}</div><span class="caret"></span></a>
+                                          <ul aria-labelledby="QuesType" class="dropdown-menu">
+                                            <li ng-repeat="mts in phases.mts[1]"><a href="#" ng-click=" newSurv.Tlist.push(mts) " class="hr">{% mts.title %} </a></li>
+                                          </ul>
+                                        </div>
+                                        <div class="row"> 
+                                          <div ng-show=" submitedTlist " class="col-md-12 error"> Please enter a valid date. </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="row">
+                                      <div class="col-md-4 col-xs-6 col-sm-6">
+                                        <input type="date" placeholder="Start From " ng-model="newSurv.from" name="from" required class="init-score">
+                                        <div class="row"> 
+                                          <div ng-show="( msForm.from.$touched &amp;&amp;  msForm.from.$error.required  ) || submitedfrom" class="col-md-12 error"> Please enter a valid date.                         </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-4 col-xs-6 col-sm-6">
+                                        <input type="date" placeholder="End At" ng-model="newSurv.to" name="to" required class="init-score">
+                                        <div class="row"> 
+                                          <div ng-show="( msForm.to.$touched &amp;&amp;  msForm.to.$error.required  ) || submitedto " class="col-md-12 error"> Please enter a valid date.                         </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4 pull-right">
+                                      <button type="button" ng-click="addSurvay(newSurv)" class="btn btn-defulte">Submit </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" id="mts" class="tab-pane fade in">                           
+                  <div ng-repeat="item in phases.mts[1] " class="row table-row no-gutter accordion-item">
+                    <div class="col-md-12 accordion-child">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <h2>{%item.title%} <span class="desc-icon"></span></h2>
+                            </div>
+                            <div class="col-md-6 MQTitle">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <h3>Departments</h3>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div ng-repeat=" dLItem in item.departs " class="col-md-2 col-xs-3">{% dLItem%}      </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="" class="addList"> 
+                    <div class="row table-row no-gutter accordion-item">
+                      <div class="col-md-12 accordion-child">
+                        <div class="row">
+                          <div class="close col-md-12">
+                            <div class="icon pull-right"></div>
+                          </div>
+                          <div class="col-md-12">
+                            <form class="row">
+                              <div class="col-md-12">
+                                <h2> <span>+  </span>Add to this list</h2>
+                              </div>
+                              <div class="col-md-12 input-div">
+                                <input data-target="#" href="#" placeholder="What you Would like to Ask about ? " ng-model="newTarget.Title">
+                              </div>
+                              <div class="col-md-12 option-link">
+                                <div class="row"> 
+                                  <div class="col-md-6">
+                                    <div class="row"> 
+                                      <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <div class="desc-icon"></div>
+                                      </div>
+                                      <div class="col-md-11 col-xs-10 col-sm-11">
+                                        <div class="dropdown"><a id="QuesType" ng-click="   newTarget.departs = newTarget.departs || [] " href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <div class="init-score">{% ' Chose your Question from list ' %}</div><span class="caret"></span></a>
+                                          <ul aria-labelledby="QuesType" class="dropdown-menu">
+                                            <li ng-repeat="dItem in departmentsList"><a href="#" ng-click=" newTarget.departs.push(dItem) " class="hr">{% dItem %}</a></li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                      <div class="hidden-div">The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.</div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="row">
+                                      <div class="col-md-3 pull-right"></div>
+                                    </div>
+                                    <button type="button" ng-click="addSurvay(newTarget)" class="btn btn-defulte">Submit </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -181,21 +369,21 @@
             <div class="col-md-12">
               <!-- Nav tabs-->
               <ul role="tablist" class="nav nav-tabs row no-gutter">
-                <li role="presentation" ng-repeat="(key , phase) in HRSurvayTasks.phases " class="col-md-3 col-sm-3 col-xs-12 &lt;%$index ==0 ? 'active': ''%&gt;"><a href="#&lt;%key%&gt;" aria-controls="&lt;%key%&gt;" role="tab" data-toggle="tab"><%phase[0]%><span><%phase[1].length%></span></a></li>
+                <li role="presentation" ng-repeat="(key , phase) in HRSurvayTasks.phases " class="col-md-3 col-sm-3 col-xs-12 {%$index ==0 ? 'active': ''%}"><a href="#{%key%}" aria-controls="{%key%}" role="tab" data-toggle="tab">{%phase[0]%}<span>{%phase[1].length%}</span></a></li>
               </ul>
               <!-- Tab panes-->
               <div class="tab-content">
-                <div role="tabpanel" ng-repeat="(key , phase) in HRSurvayTasks.phases " id="&lt;%key%&gt;" class="tab-pane fade in &lt;%$index ==0 ? 'active': ''%&gt;"> 
+                <div role="tabpanel" ng-repeat="(key , phase) in HRSurvayTasks.phases " id="{%key%}" class="tab-pane fade in {%$index ==0 ? 'active': ''%}"> 
                   <div ng-repeat="task in phase[1] " class="row table-row no-gutter accordion-item">
-                    <!-- a.col-md-12(role='button', data-toggle='collapse', href='#<%key + $index%> ', aria-expanded='false', aria-controls='<%key + $index%>  ')--><a href="#&lt;%key + $index%&gt; " class="col-md-12 accordion-child">
+                    <!-- a.col-md-12(role='button', data-toggle='collapse', href='#{%key + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')--><a href="#{%key + $index%} " class="col-md-12 accordion-child">
                       <div class="row">
                         <div class="col-md-10 col-xs-8">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2><%task.title%> <span class="desc-icon"></span></h2>
+                              <h2>{%task.title%} <span class="desc-icon"></span></h2>
                             </div>
                             <div class="col-md-12 description">
-                              <p>  <%task.description%> </p>
+                              <p>  {%task.description%} </p>
                             </div>
                             <div class="col-md-12 estimate">
                               <p>Estimate: 40 Hours</p>
@@ -203,7 +391,7 @@
                           </div>
                         </div>
                         <div class="col-md-1 col-xs-2"> 
-                          <button ng-show="&lt;%task.isComment%&gt;" type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="" class="comment"></button>
+                          <button ng-show="{%task.isComment%}" type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="" class="comment"></button>
                           <div class="PopupCont-comment"> 
                             <div class="close col-md-12">
                               <div class="icon pull-right"></div>
@@ -224,7 +412,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-1 col-xs-2"><span class="date"> <%task.date%> </span></div>
+                        <div class="col-md-1 col-xs-2"><span class="date"> {%task.date%} </span></div>
                       </div></a>
                   </div>
                 </div>

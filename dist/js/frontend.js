@@ -50,18 +50,18 @@ function triggerEvent() {
         });
     });
     /************** openTask ***************** */
-    $('.table-row').on("openTask", function (event) {
+    $('body').on("openTask", '.table-row', function (event) {
         $(this).trigger('closeTask').addClass('active').find(' .comment ').triggerHandler("initComment");
     });
     /************** closeTask ***************** */
-    $('.table-row').on("closeTask", function (e) {
+    $('body').on("closeTask", '.table-row', function (e) {
         $('.table-row').removeClass('active');
         $('.opened').popover('hide').removeClass('opened');
     });
     /************** initComment ***************** */
-    $('.table-row').on("click", function (e) {
+    $('body').on("click", '.table-row', function (e) {
         if (!$(this).hasClass('openedTask')) {
-            $(this).triggerHandler("openTask");
+            $(this).trigger("openTask");
             $('.table-row').removeClass('openedTask');
             $(this).addClass('openedTask');
         }

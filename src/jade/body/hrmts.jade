@@ -1,0 +1,55 @@
+.row.table-row.no-gutter.accordion-item(ng-repeat="item in phases.mts[1] ")
+        .col-md-12.accordion-child
+            .row
+                .col-md-12
+                    .row
+                        .col-md-6
+                            h2 {%item.title%} 
+                                span.desc-icon
+                        .col-md-6.MQTitle
+                            .row
+                                .col-md-12
+                                    h3 Departments
+                            .row
+                                .col-md-2.col-xs-3(ng-repeat=" dLItem in item.departs ")
+                                    {% dLItem%}      
+                        
+                                                        
+                                                
+.addList(id="", class="") 
+    .row.table-row.no-gutter.accordion-item()
+        .col-md-12.accordion-child()
+            .row
+                .close.col-md-12
+                        .icon.pull-right
+                .col-md-12
+                    form.row
+                        .col-md-12
+                            h2 
+                                span +  
+                                | Add to this list
+                        .col-md-12.input-div
+                            input(data-target="#", href="#",placeholder="What you Would like to Ask about ? ", ng-model="newTarget.Title")  
+                        .col-md-12.option-link
+                            .row 
+                                .col-md-6
+                                    .row 
+                                        .col-md-1.col-sm-1.col-xs-2
+                                            .desc-icon
+                                        .col-md-11.col-xs-10.col-sm-11
+                                                .dropdown
+                                                    a#QuesType(ng-click="   newTarget.departs = newTarget.departs || [] ",  href="#", data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                        .init-score {% ' Chose your Question from list ' %}
+                                                        span.caret
+                                                    ul.dropdown-menu(aria-labelledby='QuesType')
+                                                        li(ng-repeat="dItem in departmentsList")
+                                                            a.hr(href="#", ng-click=" newTarget.departs.push(dItem) ") {% dItem %}
+                                            .hidden-div
+                                                | The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.
+                                .col-md-12
+                                    .row
+                                       .col-md-3.pull-right
+                                    button.btn.btn-defulte(type="button", ng-click="addSurvay(newTarget)") Submit 
+                                
+                
+ 

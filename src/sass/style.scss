@@ -12,7 +12,7 @@ $pri-color : #5da1b4 ;
 $tab-border-color: #73778c;
 $border-color: #e0e0e0;
 $link-hover : #a8adc3;
-
+$font-color : #444152; 
 
 html{
   min-height: 100%;
@@ -21,7 +21,8 @@ html{
 body {
   background-color: transparent ;
  font-family: 'Roboto', sans-serif;
- color : $pri-color ;
+ color : $font-color ;
+font-weight: 300;
 }
 .nav {
     padding-left: 15px;
@@ -79,9 +80,12 @@ body {
     &:hover{
         .table-row{
             border-bottom: 1px solid rgba(0, 0, 0, 0.10);
-            opacity: 0.2;
+            opacity: 0.6;
             &.active {
                 opacity: 1;
+                  h2,span{
+                        color: $font-color !important  ;
+                        }      
             }
     }
       }
@@ -93,6 +97,7 @@ body {
             &:hover{
                 // background-color: rgba(0, 0, 0, 0.03);
                 opacity: 1;
+                  
             }
             a {
                 text-decoration: none;
@@ -102,18 +107,27 @@ body {
         h2,span{
                 padding: 25px 0px;
                 display: block; 
-                color: $pri-color ;
+               color: $pri-color ;
                 
         } 
+
+        h3 {
+                font-size: 16px;
+                margin: 0px;
+                font-weight: normal;
+                padding: 0px 0px 15px;
+                color: #000;
+                
+        }
         h2 {
                 font-size: 22px;
-                line-height: 1.5;
+                // line-height: 1.5;
                 margin: 0px;
                 font-weight: 300;
-                padding: 25px 0px 0px;
+                // padding: 15px 0px 0px;
                
          .desc-icon{
-                      margin:   0px 0px 25px;
+                      margin:   0px 0px 0px;
         }
                 }
                 
@@ -147,7 +161,7 @@ $HRFcolor : #413d56;
 // #4c3d56;
 $HRScolor : #2e414d ;
 $HRdeg : 135deg;
-
+$HRScolorLight :  #2d5873;
 
 @mixin gradiant($Fcolor , $Scolor , $deg) {
   background: $Fcolor; /* For browsers that do not support gradients */
@@ -273,18 +287,22 @@ boot strap hack
 
 .accordion-item{
   margin: 0;
-  overflow: hidden;
+  /*overflow: hidden;*/
 
   transition: all 0.3s ease;
-  
+  .accordion-child{
+      a{
+          height: 40px;
+      }
+  }
 //   opacity: 0;
 //   height: 20px;
 //   transform: scale(1,0);
 //   transform-origin: center top;
-    .description, .estimate{
+    .quesType, .score{
         display: none;
     }  
-    .estimate  {
+    .score  {
         margin-top: 25px;
         padding-left: 30px;
             p {
@@ -304,7 +322,7 @@ boot strap hack
             height: auto;
             opacity: 1;
 
-    .description , .estimate {
+    .quesType , .score {
         display: block;
     }  
     div[class*="col"]{
@@ -385,21 +403,21 @@ font-weight: 700;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .popover.bottom>.arrow{
     border-bottom-color: transparent;
+}
+
+
+.openedTask{
+.close, .mtsTitle, .MQTitle {
+    display: block;
+}
+
+}
+
+.close, .mtsTitle, .MQTitle {
+    
+    display: none;
 }
 
 
@@ -475,12 +493,30 @@ font-weight: 700;
             }
             }
     button{
-           background: #3cc17e;
+    //    background: #3cc17e;
     float: right;
-    color: #fff;
+    color: #fff !important;
     /* width: 190px; */
     padding: 12px 65px;
     text-align: center;
+        
+    -webkit-transition: all .7s; /* Safari 3.1 to 6.0 */
+    transition: all .7s;
+    
+     &.btn-defulte {
+        @include  gradiant($HRFcolor , $HRScolorLight , $HRdeg) ;
+
+    }
+
+        &:hover, &:focus {
+        // @include  gradiant($HRScolorLight , $HRFcolor , $HRdeg) ;
+            color: #fff;
+            padding: 12px 75px;
+
+        }
+        &:active {
+        background-color: $HRFcolor  ;
+        }
 
     }
 
@@ -489,12 +525,14 @@ font-weight: 700;
     .col-md-1{
         margin-right: -30px;
     }
-    .init-link{
+    input.init-score{
             height: 30px;
             display: table-cell;
             vertical-align: middle;
             font-size: large;
             color: #AFB0AC;
+            border: none;
+            background-color: transparent;
     }
      .hidden-div{
          display: none;
@@ -513,7 +551,7 @@ font-weight: 700;
          display: block;
         
     }
-    .init-link{
+    .init-score{
          display: none;
          
      }
@@ -580,6 +618,11 @@ font-weight: 700;
             }
             }
             }
+    }
+
+
+    .dropdown-menu{
+        min-width: 100%;
     }
 @import 'responsive.scss'; 
 

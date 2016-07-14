@@ -1,0 +1,59 @@
+.row.table-row.no-gutter.accordion-item(ng-repeat="ques in phases.mq[1] ")
+        // a.col-md-12(role='button', data-toggle='collapse', href='#{% 'ms' + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')
+        a.col-md-12.accordion-child( href="#{% 'ms' + $index%}" ) 
+            .row
+                .col-md-12
+                    .row
+                        .col-md-12
+                            h2 {%ques.title%} 
+                                span.desc-icon
+                        .col-md-12.quesType
+                            div(question-type , q-type="ques" ) 
+                        .col-md-12.score(ng-show="hrin")
+                            p Score : {% ques.score %}
+                
+                                                
+.addList(id="", class="") 
+    .row.table-row.no-gutter.accordion-item()
+        .col-md-12.accordion-child()
+            .row
+                .close.col-md-12
+                        .icon.pull-right
+                .col-md-12
+                    form.row
+                        .col-md-12
+                            h2 
+                                span +  
+                                | Add to this list
+                        .col-md-12.input-div
+                            input(data-target="#", href="#",placeholder="What you Would like to Ask about ? ", ng-model="newQues.Title")  
+                        .col-md-12.option-link
+                            .row 
+                                .col-md-9
+                                    .row
+                                        .col-md-1.col-sm-1.col-xs-2
+                                            .desc-icon
+                                        .col-md-11.col-xs-10.col-sm-11
+                                                .dropdown
+                                                    a#QuesType(type="button" data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                        .init-score {% newQues.Text || ' Chose your Question type ' %}
+                                                        span.caret
+                                                    ul.dropdown-menu(aria-labelledby='QuesType')
+                                                        li
+                                                            a.hr(href="#", ng-click=" newQues.Type  = 1 ;  newQues.Text  = 'Yes || No' ") Yes || No
+                                                        li
+                                                            a.emp(href="#", ng-click=" newQues.Type  = 2 ;  newQues.Text  = 'Single Selection' ")  Single Selection
+                                            
+                                                        li
+                                                            a.emp(href="#", ng-click=" newQues.Type  = 3 ;  newQues.Text  = 'Multiple Selection' ")  Multiple Selection
+                                            .hidden-div
+                                                | The beta version needs to test the usability of product features (from alpha features to newer beta features) to approve the product as an alternative to using Google Spreadsheets.
+                                    .row
+                                        .col-md-1.col-sm-1.col-xs-2
+                                            .person-icon
+                                        .col-md-11.col-xs-10.col-sm-11
+                                            input.init-score(data-target="#", href="#",placeholder="Question Score ",ng-model="newQues.Score") 
+                                .col-md-3.pull-right
+                                    button.btn.btn-defulte(type="button", ng-click="addQuestion(newQues)") Submit 
+                                
+                

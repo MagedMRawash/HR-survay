@@ -15,31 +15,31 @@
                 .col-md-12
                     .time 63
                         span  Hours
-                            
+                             
     section.tasks
         .container
             .row
                 div.col-md-12
                     // Nav tabs
                     ul.nav.nav-tabs.row.no-gutter(role='tablist')
-                        li.col-md-3.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in HRSurvayTasks.phases ", class="<%$index ==0 ? 'active': ''%>")
-                            a(href='#<%key%>', aria-controls='<%key%>', role='tab', data-toggle='tab') <%phase[0]%>
-                                span <%phase[1].length%>
+                        li.col-md-3.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in HRSurvayTasks.phases ", class="{%$index ==0 ? 'active': ''%}")
+                            a(href='#{%key%}', aria-controls='{%key%}', role='tab', data-toggle='tab') {%phase[0]%}
+                                span {%phase[1].length%}
 
                     // Tab panes
                     .tab-content
-                        .tab-pane.fade.in(role='tabpanel',ng-repeat="(key , phase) in HRSurvayTasks.phases ",id="<%key%>", class="<%$index ==0 ? 'active': ''%>") 
+                        .tab-pane.fade.in(role='tabpanel',ng-repeat="(key , phase) in HRSurvayTasks.phases ",id="{%key%}", class="{%$index ==0 ? 'active': ''%}") 
                             .row.table-row.no-gutter.accordion-item(ng-repeat="task in phase[1] ")
-                                // a.col-md-12(role='button', data-toggle='collapse', href='#<%key + $index%> ', aria-expanded='false', aria-controls='<%key + $index%>  ')
-                                a.col-md-12.accordion-child( href='#<%key + $index%> ')
+                                // a.col-md-12(role='button', data-toggle='collapse', href='#{%key + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')
+                                a.col-md-12.accordion-child( href='#{%key + $index%} ')
                                     .row
                                         .col-md-10.col-xs-8
                                             .row
                                                 .col-md-12
-                                                    h2 <%task.title%> 
+                                                    h2 {%task.title%} 
                                                         span.desc-icon
                                                 .col-md-12.description
-                                                    p   <%task.description%> 
+                                                    p   {%task.description%} 
                                                 .col-md-12.estimate
                                                     p Estimate: 40 Hours
                                         
@@ -47,7 +47,7 @@
 
 
                                         .col-md-1.col-xs-2 
-                                            button.comment(ng-show="<%task.isComment%>" ,type='button', data-container='body', data-toggle='popover', data-placement='bottom', data-content='')
+                                            button.comment(ng-show="{%task.isComment%}" ,type='button', data-container='body', data-toggle='popover', data-placement='bottom', data-content='')
                                             .PopupCont-comment 
                                                     .close.col-md-12
                                                             .icon.pull-right
@@ -68,7 +68,7 @@
                                                         .col-md-12.pull-right
                                                             button.btn.btn-defulte(type="button") Send 
                                         .col-md-1.col-xs-2
-                                            span.date  <%task.date%> 
+                                            span.date  {%task.date%} 
                                             
                         .addList(id="", class="") 
                             .row.table-row.no-gutter.accordion-item()
