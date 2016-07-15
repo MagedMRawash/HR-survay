@@ -15,7 +15,7 @@ var app = angular.module('hrsurvay', [], function ($interpolateProvider) {
 });
 app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http) {
         ///////  ChosePersonas
-        $scope.hrin = false; // defult false
+        $scope.hrin = true; // defult false
         $scope.empin = false;
         $scope.introShow = false;
         $scope.introShow = $scope.hrin || $scope.empin;
@@ -145,24 +145,67 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
                 $scope.newTarget = undefined;
             }
         };
+        $scope.changeScore = function (score, obj) {
+            $scope.EmpScor = $scope.EmpScor || 0;
+            //  console.log(obj);
+            if (obj == null) {
+                $scope.EmpScor -= score.score || 0;
+            }
+            else {
+                $scope.EmpScor += score.score || 0;
+            }
+            console.log(obj);
+            //  return 'get'
+        };
+        //     checkClass =  choseOption(empQues, $parent, $index) 
+        //         $scope.choiseClass = $scope.choiseClass || [];
+        //     $scope.choseOption = function (obj, par, ind ) {
+        //         console.log(obj+ ' '+ par+' '+ ind ) ;
+        //         $scope.choiseClass[par] = $scope.choiseClass[par] ||  [];
+        //         obj.quesType[0] == 3 ? null : $scope.choiseClass[par] = [];
+        //  $scope.choiseClass[par][ind] =  $scope.choiseClass[par][ind]  ||  [] ;
+        //         $scope.choiseClass[par][ind] = $scope.choiseClass[par][ind] == 'get' ? null : 'get';
+        //         console.log($scope.choiseClass)
+        //         return  $scope.choiseClass[par][ind] 
+        //     }
+        $scope.test = function (obje) {
+            console.log(obje);
+        };
         $scope.ChoseAnswer = function (value) {
             console.log(value);
         };
     }]);
+app.directive("contenteditable", function () {
+    return {
+        //restrict: "A",
+        scope: false,
+        require: "ngModel",
+        link: function (scope, element, attrs, ngModel) {
+            function read() {
+                ngModel.$setViewValue(element.html());
+            }
+            ngModel.$render = function () {
+                element.html(ngModel.$viewValue || "");
+            };
+            element.bind("blur keyup change", function () {
+                scope.$apply(read);
+            });
+        }
+    };
+});
 app.directive('questionType', function ($compile) {
     function postLink(scope, elem, attrs) {
         var obj = scope.ques;
-        if (obj.quesType[0] == 1) {
-            var temp = '<ul aria-labelledby="dLabel{% $index %}" >\
-         <li><a href="#" ng-click="ChoseAnswer(true)" >Yes</a></li>\
-           <li><a href="#" ng-click="ChoseAnswer(false)" >No</a></li>\
-         </ul>';
+        if (obj.quesType[0] == 0 /*1*/) {
+            var temp = '<div aria-labelledby="dLabel{% $index %}"  class="choises-col">\
+         <a href="#"  class="choiseItem"  ng-click="ChoseAnswer(true)" >Yes</a>\
+           <a href="#"   class="choiseItem"  ng-click="ChoseAnswer(false)" >No</a>\
+           <div>   ';
         }
-        if (obj.quesType[0] == 2) {
-            var temp = '<div class="dropdown"><a id="dLabel{% $index %}" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Personas<span class="caret"></span></a>\
-    <ul  aria-labelledby="dLabel{% $index %}" class="dropdown-menu">\
-       <li  ng-repeat=" ans  in ques.quesType[1] " ><a href="#"ng-click="ChoseAnswer(ans)" >{%ans%}</a></li>\
-         </ul>\
+        if (obj.quesType[0] == 2 || 1) {
+            var temp = '<div class="choises-col" >\
+      <a href="#"  contenteditable  class="choiseItem"   ng-repeat=" ans  in ques.quesType[1] "  ng-click="ChoseAnswer(ans)" >{%ans%}</a>\
+      <a href="#"    class="choiseItem"    ng-click="ques.quesType[1].push(\'ans\' + ques.quesType[1].length)" > + </a>\
        </div>';
         }
         elem.html(temp);
@@ -178,25 +221,51 @@ app.directive('questionType', function ($compile) {
 var mq = [{
         title: "Are you satisfied in ITS ?",
         quesType: [1, [
-                1, 2
-            ]]
+                'Yes', 'No'
+            ]],
+        score: 10
     }, {
         title: "Please chose, how long are you works at ITS ? (by year)",
         quesType: [2, [
-                1, 2, 3, 4
+                '1 Year', '2 Years', '3 Years', '4 Years'
             ]],
-        score: 0
+        score: 5
     }, {
         title: "Are you Developer at ITS ?",
-        quesType: [1, [
+        quesType: [3, [
                 1, 2
-            ]]
+            ]],
+        score: 9
     }, {
         title: "Please chose, how much child do you have ? (by year)",
-        quesType: [2, [
+        quesType: [3, [
                 1, 2, 3, 4
             ]],
-        score: 0
+        score: 7
+    }, {
+        title: "Are you satisfied in ITS ?",
+        quesType: [1, [
+                'Yes', 'No'
+            ]],
+        score: 10
+    }, {
+        title: "Please chose, how long are you works at ITS ? (by year)",
+        quesType: [2, [
+                '1 Year', '2 Years', '3 Years', '4 Years'
+            ]],
+        score: 5
+    }, {
+        title: "Are you Developer at ITS ?",
+        quesType: [3, [
+                1, 2
+            ]],
+        score: 9
+    }, {
+        title: "Please chose, how much child do you have ? (by year)",
+        quesType: [3, [
+                1, 2, 3, 4
+            ]],
+        score: 7
     }];
 var departmentsList = ['media', 'web', 'social', 'front-end', 'backend-end'];
 var mts = [{

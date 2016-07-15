@@ -1,16 +1,17 @@
 .row.table-row.no-gutter.accordion-item(ng-repeat="ques in phases.mq[1] ")
         // a.col-md-12(role='button', data-toggle='collapse', href='#{% 'ms' + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')
-        a.col-md-12.accordion-child( href="#{% 'ms' + $index%}" ) 
+        .col-md-12.accordion-child( href="#{% 'ms' + $index%}" ) 
             .row
                 .col-md-12
                     .row
                         .col-md-12
-                            h2 {%ques.title%} 
-                                span.desc-icon
+                            h2(contenteditable, ng-model="ques.title" )  {%ques.title%} 
+                                //span.desc-icon
                         .col-md-12.quesType
                             div(question-type , q-type="ques" ) 
                         .col-md-12.score(ng-show="hrin")
-                            p Score : {% ques.score %}
+                            p Score : 
+                                span(contenteditable, ng-model="ques.score" ,ng-blur="test(ques)") {% ques.score %}
                 
                                                 
 .addList(id="", class="") 

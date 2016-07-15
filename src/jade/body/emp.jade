@@ -13,32 +13,34 @@
         .container
             .row
                 .col-md-12
-                    .time 63
+                    .time {% EmpScor || 0  %} 
                         span  Score
                              
     section.tasks
         .container
             .row
                 div.col-md-12
-                    h1.time  {%  phases.ms[1][0].title %}
+                    h1.time  {%  phases.ms[1][0].title %} 
             .row
                 // Tab panes
                 div.col-md-12
                     .tab-content
                         .tab-pane.fade.in(role='tabpanel',id="mq", class=" active")
-                            .row.table-row.no-gutter.accordion-item(ng-repeat="task in phases.ms[1][0].Qlist ")
-                                a.col-md-12.accordion-child()
-                                    .row
+                            .row.table-row.no-gutter.accordion-item(ng-repeat="empQues  in phases.ms[1][0].Qlist ")
+                                .col-md-12.accordion-child()
+                                    .row 
                                         .col-md-10.col-xs-8
                                             .row
                                                 .col-md-12
-                                                    h2 {%task.title%} 
+                                                    h2 {%empQues.title%} 
                                                         //- span.desc-icon
-                                                .col-md-12.description
-                                                    p   {%task.description%} 
+                                                .col-md-12.choises-col
+                                                    a.choise(href="#",ng-repeat="choise in empQues.quesType[1]", ng-click="( empQues.quesType[0] == 3 ?   null  :  (  $root.choiseClass[$parent.$index] = null  )   ) ;  $root.choiseClass[$parent.$index][$index]  =  $root.choiseClass[$parent.$index][$index]  == 'get' ? null : 'get' ;   changeScore(empQues ,  $root.choiseClass )   ", class="{%   $root.choiseClass[$parent.$index][$index] + ' '  + empQues.quesType[0] %}") {% choise %} 
  
-
-
                                         
+
+            .row
+                .col-md-12
+                    button.btn.btn-defulte.result(type="button", ng-click="sendform(phases.ms[1][0].Qlist )") Send Result  
 
 

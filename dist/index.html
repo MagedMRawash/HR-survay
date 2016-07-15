@@ -60,22 +60,26 @@
               <div class="tab-content">
                 <div role="tabpanel" id="mq" class="tab-pane fade in  active">
                   <div ng-repeat="ques in phases.mq[1] " class="row table-row no-gutter accordion-item">
-                    <!-- a.col-md-12(role='button', data-toggle='collapse', href='#{% 'ms' + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')--><a href="#{% 'ms' + $index%}" class="col-md-12 accordion-child"> 
+                    <!-- a.col-md-12(role='button', data-toggle='collapse', href='#{% 'ms' + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')-->
+                    <div href="#{% 'ms' + $index%}" class="col-md-12 accordion-child"> 
                       <div class="row">
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2>{%ques.title%} <span class="desc-icon"></span></h2>
+                              <h2 contenteditable ng-model="ques.title"> {%ques.title%} 
+                                <!--span.desc-icon-->
+                              </h2>
                             </div>
                             <div class="col-md-12 quesType">
                               <div question-type q-type="ques"> </div>
                             </div>
                             <div ng-show="hrin" class="col-md-12 score">
-                              <p>Score : {% ques.score %}</p>
+                              <p>Score : <span contenteditable ng-model="ques.score" ng-blur="test(ques)">{% ques.score %}</span></p>
                             </div>
                           </div>
                         </div>
-                      </div></a>
+                      </div>
+                    </div>
                   </div>
                   <div id="" class="addList"> 
                     <div class="row table-row no-gutter accordion-item">
@@ -146,7 +150,7 @@
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2>{%ques.title%} <span class="desc-icon"></span></h2>
+                              <h2 contenteditable ng-model="ques.title">{%ques.title%} <span class="desc-icon"></span></h2>
                             </div>
                             <div class="col-md-8 MQTitle">
                               <div class="row">
@@ -172,10 +176,10 @@
                                   <h3>Duration</h3>
                                 </div>
                                 <div class="col-md-6 score">
-                                  <p>From : {% ques.from %}   </p>
+                                  <p contenteditable ng-model="ques.from">From : {% ques.from %}   </p>
                                 </div>
                                 <div class="col-md-6 score">
-                                  <p>To : {% ques.to %}   </p>
+                                  <p contenteditable ng-model="ques.to">To : {% ques.to %}   </p>
                                 </div>
                                 <div class="col-md-12 score">
                                   <p>Grade : {% ques.ScoreTargetedRanges  %}   </p>
@@ -366,7 +370,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <div class="time">63<span> Score</span></div>
+              <div class="time">{% EmpScor || 0  %} <span> Score</span></div>
             </div>
           </div>
         </div>
@@ -375,7 +379,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <h1 class="time"> {%  phases.ms[1][0].title %}</h1>
+              <h1 class="time"> {%  phases.ms[1][0].title %} </h1>
             </div>
           </div>
           <div class="row">
@@ -383,22 +387,28 @@
             <div class="col-md-12">
               <div class="tab-content">
                 <div role="tabpanel" id="mq" class="tab-pane fade in  active">
-                  <div ng-repeat="task in phases.ms[1][0].Qlist " class="row table-row no-gutter accordion-item"><a class="col-md-12 accordion-child">
-                      <div class="row">
+                  <div ng-repeat="empQues  in phases.ms[1][0].Qlist " class="row table-row no-gutter accordion-item">
+                    <div class="col-md-12 accordion-child">
+                      <div class="row"> 
                         <div class="col-md-10 col-xs-8">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2>{%task.title%} 
+                              <h2>{%empQues.title%} 
                               </h2>
                             </div>
-                            <div class="col-md-12 description">
-                              <p>  {%task.description%} </p>
-                            </div>
+                            <div class="col-md-12 choises-col"><a href="#" ng-repeat="choise in empQues.quesType[1]" ng-click="( empQues.quesType[0] == 3 ?   null  :  (  $root.choiseClass[$parent.$index] = null  )   ) ;  $root.choiseClass[$parent.$index][$index]  =  $root.choiseClass[$parent.$index][$index]  == 'get' ? null : 'get' ;   changeScore(empQues ,  $root.choiseClass )   " class="choise {%   $root.choiseClass[$parent.$index][$index] + ' '  + empQues.quesType[0] %}">{% choise %} </a></div>
                           </div>
                         </div>
-                      </div></a></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="button" ng-click="sendform(phases.ms[1][0].Qlist )" class="btn btn-defulte result">Send Result  </button>
             </div>
           </div>
         </div>
