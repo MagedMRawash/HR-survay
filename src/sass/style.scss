@@ -16,6 +16,7 @@ $HRScolor: #2e414d;
 $HRdeg: 135deg;
 $HRScolorLight: #2d5873;
 $bg-color: #fbfcf7;
+$best-green: #57fdc5;
 html {
     min-height: 100%;
 }
@@ -63,7 +64,7 @@ body {
             //width: 220px;
             padding-left: 0;
             border: 0px;
-               border-bottom: 4px solid rgb(115, 119, 140);
+            border-bottom: 4px solid rgb(115, 119, 140);
             color: $link-hover;
             line-height: 2.355;
             text-align: left;
@@ -116,6 +117,9 @@ body {
                     margin: 0 -9px;
                     display: block;
                 }
+                .error {
+                    display: block;
+                }
             } /////  end of hide outside active 
             .choises-col {
                 display: none;
@@ -125,9 +129,7 @@ body {
                     margin: 0 10px;
                     background-color: #413d56;
                     color: #fff;
-                    &.choise.get {
-                        background-color: #62b348 !important;
-                    }
+                    &.choise {}
                 }
             }
             &:hover {
@@ -213,7 +215,7 @@ header {
         font-size: 21px;
         color: $pri-color;
         span {
-            color: $bg-color ;
+            color: $bg-color;
         }
     }
 }
@@ -303,7 +305,7 @@ h1.time {
         display: none;
     }
     .score {
-        margin-top: 25px;
+        // margin-top: 25px;
         //padding-left: 30px;
         p {
             font-size: 17px !important;
@@ -546,6 +548,14 @@ section#intro {
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
+    h1{
+            font-weight: 100;
+            color: #57fdc5;
+            margin: 30px auto;
+            float: inherit;
+            max-width: 500px;
+            text-align: center;
+    }
     .dropdown {
         margin: 0 auto;
         float: none;
@@ -553,12 +563,16 @@ section#intro {
         width: auto;
         #dLabel {
             font-size: x-large;
-            background: #2e3a44;
+            background: $best-green; // #2e3a44;
             // @include  gradiant( $HRScolorLight , $HRFcolor ,  $HRdeg) ;
             padding: 15px 55px;
-            color: #fff;
+            color: #2e3a44;
             text-decoration: none;
-            font-weight: 100;
+            font-weight: 300;
+            &:active {
+                background: #2e3a44; // #2e3a44;
+                color: $best-green;
+            }
         }
         ul {
             min-width: 100%;
@@ -613,16 +627,142 @@ button {
 .result {
     width: 100%;
     padding: 20px 0;
-    background: #62b348 !important;
+    background: $best-green !important;
     font-weight: 300;
     font-size: 20px;
     margin-top: 30px;
+    color: $HRScolor !important;
     &:hover {
-        background: #4ad01f !important;
+        background: $best-green !important;
     }
     &:active {
         background-color: $HRFcolor !important;
+        color: #fff !important;
     }
 }
 
+.warp-all.animation.ng-hide-add,
+.animation.ng-hide-remove {
+    -webkit-transition: all linear .5s;
+    -moz-transition: all linear .5s;
+    -o-transition: all linear .5s;
+    transition: all linear .5s;
+    display: block!important;
+}
+
+.animation.ng-hide-add {
+    -webkit-transition: all linear 1.5s 2s;
+    -moz-transition: all linear 1.5s 2s;
+    -o-transition: all linear 1.5s 2s;
+    transition: all linear 1.5s 2s;
+    display: block!important;
+}
+
+.sendmas.animation.ng-hide-remove {
+    -webkit-transition: all linear 1s 1.5s;
+    -moz-transition: all linear 1s 1.5s;
+    -o-transition: all linear 1s 1.5s;
+    transition: all linear 1s 1.5s;
+    display: block!important;
+}
+
+.animation.ng-hide-add.ng-hide-add-active,
+.animation.ng-hide-remove {
+    opacity: 0;
+}
+
+.animation.ng-hide-add,
+.animation.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+}
+
+.twest .time {
+    font-size: 40px;
+    position: fixed;
+    top: 0;
+    margin: 0;
+    right: 0;
+    background: #57fdc5;
+    z-index: 1000000;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 32px #000;
+    color: #403d55;
+}
+
+section#intro .dropdown ul {
+    min-width: 100%;
+    margin-top: 22px;
+}
+
+.addopt {
+    background: $best-green
+}
+
+*[contenteditable] {
+    &:focus,
+    &:active {
+        padding: 10px 20px !important;
+        margin: 0 -20px;
+        background: url("assets/img/desc.png") rgba(171, 171, 171, 0.13) no-repeat 97% center;
+        background-size: 15px;
+    }
+}
+
+.error {
+    color: red;
+    padding: 10px 20px;
+    // float: none;
+    display: none;
+}
+
+#mq {
+    .score {
+        margin-top: 25px;
+    }
+}
+
+.dur {
+    margin-top: 15px;
+    P {
+        line-height: 0.8;
+    }
+}
+
+.sendmas {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    left: 54%;
+    h2 {
+        font-weight: 300;
+        font-size: -webkit-xxx-large;
+        line-height: 1;
+        width: 290px;
+    }
+    h1 {
+        ine-height: 0;
+        margin-bottom: 40px;
+    }
+}
+
+.get {
+    background-color: $best-green !important;
+    color: $HRFcolor !important;
+}
+
+
+[data-toggle="dropdown"]{
+    height: 46px;
+    /* padding: 20px 10px; */
+}
+
+[data-toggle="dropdown"] >  div{
+      padding: 10px 10px;
+      }
+
+      .accordion-item .accordion-child ul a {
+    height: auto;
+    padding: 10px 20px;
+}
 @import 'responsive.scss';

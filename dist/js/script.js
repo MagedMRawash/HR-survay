@@ -9,13 +9,13 @@
 ///////////////////////
 var angular;
 var go;
-var app = angular.module('hrsurvay', [], function ($interpolateProvider) {
+var app = angular.module('hrsurvay', ['ngAnimate'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{%');
     $interpolateProvider.endSymbol('%}');
 });
 app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http) {
         ///////  ChosePersonas
-        $scope.hrin = true; // defult false
+        $scope.hrin = false; // defult false
         $scope.empin = false;
         $scope.introShow = false;
         $scope.introShow = $scope.hrin || $scope.empin;
@@ -30,12 +30,36 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
         };
         /////////////// INIT
         $scope.tasks = [];
-        $scope.phases = {
+        $scope.departmentsList = departmentsList;
+        //////////// Storing data 
+        $scope.storeNamechange = function () {
+            localStorage.setItem('userName', $scope.userName);
+        };
+        $scope.getName = function () {
+            if (!localStorage.getItem('userName')) {
+                return false;
+            }
+            else {
+                return localStorage.getItem('userName');
+            }
+        };
+        $scope.userName = $scope.getName() || "Please Enter Your Name";
+        $scope.storephaseschange = function () {
+            localStorage.setItem('phases', JSON.stringify($scope.phases));
+        };
+        $scope.getphases = function () {
+            if (!localStorage.getItem('phases')) {
+                return false;
+            }
+            else {
+                return JSON.parse(localStorage.getItem('phases'));
+            }
+        };
+        $scope.phases = $scope.getphases() || {
             mq: ["Manage Questions", mq],
             ms: ["Manage surveys", ms],
             mts: ["Manage targeted sector", mts]
         };
-        $scope.departmentsList = departmentsList;
         ////////// Add Question 
         $scope.addQuestion = function (newQ) {
             var dataValid = false;
@@ -65,7 +89,7 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
                 $scope.phases.mq[1] = $scope.phases.mq[1].concat({
                     title: newQ.Title,
                     quesType: [newQ.Type, [
-                            1, 2, 3, 4
+                            "Option one", "Option two"
                         ]],
                     score: newQ.Score
                 });
@@ -113,6 +137,7 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
                     to: newS.to
                 });
                 $scope.newSurv = undefined;
+                angular.element('.get').removeClass('get');
             }
         };
         ////////// Add  Targeted Sector 
@@ -145,9 +170,18 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
                 $scope.newTarget = undefined;
             }
         };
+        $scope.multicoiseAdd = function (get, parObj, mts) {
+            parObj.push(mts);
+            return get;
+        };
+        $scope.multicoiseRemove = function (get, parObj, index) {
+            parObj.splice(index, 1);
+            return null;
+        };
         $scope.changeScore = function (score, obj) {
             $scope.EmpScor = $scope.EmpScor || 0;
             //  console.log(obj);
+            console.log($scope.phases);
             if (obj == null) {
                 $scope.EmpScor -= score.score || 0;
             }
@@ -168,14 +202,26 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
         //         console.log($scope.choiseClass)
         //         return  $scope.choiseClass[par][ind] 
         //     }
+        $scope.sendform = function (obje) {
+            obje = obje == true ? false : true;
+            $scope.empin = false;
+            $scope.sendmas = true;
+            $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1];
+            console.log($scope.phases.ms[1][0]);
+        };
         $scope.test = function (obje) {
-            console.log(obje);
+            $scope.twest = $scope.twest == true ? false : true;
+            $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1];
+            console.log($scope.phases.ms[1][0]);
+            $scope.storephaseschange();
+            // console.log(obje);
         };
         $scope.ChoseAnswer = function (value) {
-            console.log(value);
+            // console.log(value);
+            //  angular.element('.twest').fadeIn().delay(2000).fadeOut();
         };
     }]);
-app.directive("contenteditable", function () {
+app.directive("contenteditableDir", function () {
     return {
         //restrict: "A",
         scope: false,
@@ -196,16 +242,16 @@ app.directive("contenteditable", function () {
 app.directive('questionType', function ($compile) {
     function postLink(scope, elem, attrs) {
         var obj = scope.ques;
-        if (obj.quesType[0] == 0 /*1*/) {
-            var temp = '<div aria-labelledby="dLabel{% $index %}"  class="choises-col">\
-         <a href="#"  class="choiseItem"  ng-click="ChoseAnswer(true)" >Yes</a>\
-           <a href="#"   class="choiseItem"  ng-click="ChoseAnswer(false)" >No</a>\
-           <div>   ';
-        }
-        if (obj.quesType[0] == 2 || 1) {
+        if (obj.quesType[0] == 1) {
             var temp = '<div class="choises-col" >\
-      <a href="#"  contenteditable  class="choiseItem"   ng-repeat=" ans  in ques.quesType[1] "  ng-click="ChoseAnswer(ans)" >{%ans%}</a>\
-      <a href="#"    class="choiseItem"    ng-click="ques.quesType[1].push(\'ans\' + ques.quesType[1].length)" > + </a>\
+      <a href="#"    class="choiseItem"   ng-click="ChoseAnswer(ans)" >Yes</a>\
+      <a href="#"    class="choiseItem"   ng-click="ChoseAnswer(ans)" >No</a>\
+       </div>';
+        }
+        if (obj.quesType[0] == 2) {
+            var temp = '<div class="choises-col" >\
+      <a href="#"  contenteditable  class="choiseItem" ng-repeat=" ans  in ques.quesType[1] "   ng-model="ques.quesType[1].ans"  ng-click="ChoseAnswer(ans)" >{%ans%}</a>\
+      <a href="#"    class="choiseItem addopt"    ng-click="ques.quesType[1].push(\'Click to Edit \' + ques.quesType[1].length)" > Click to Add more Options </a>\
        </div>';
         }
         elem.html(temp);
@@ -230,43 +276,15 @@ var mq = [{
                 '1 Year', '2 Years', '3 Years', '4 Years'
             ]],
         score: 5
-    }, {
-        title: "Are you Developer at ITS ?",
-        quesType: [3, [
-                1, 2
-            ]],
-        score: 9
-    }, {
-        title: "Please chose, how much child do you have ? (by year)",
+    },
+    {
+        title: "Please chose, how much child do you have ? ",
         quesType: [3, [
                 1, 2, 3, 4
             ]],
         score: 7
-    }, {
-        title: "Are you satisfied in ITS ?",
-        quesType: [1, [
-                'Yes', 'No'
-            ]],
-        score: 10
-    }, {
-        title: "Please chose, how long are you works at ITS ? (by year)",
-        quesType: [2, [
-                '1 Year', '2 Years', '3 Years', '4 Years'
-            ]],
-        score: 5
-    }, {
-        title: "Are you Developer at ITS ?",
-        quesType: [3, [
-                1, 2
-            ]],
-        score: 9
-    }, {
-        title: "Please chose, how much child do you have ? (by year)",
-        quesType: [3, [
-                1, 2, 3, 4
-            ]],
-        score: 7
-    }];
+    }
+];
 var departmentsList = ['media', 'web', 'social', 'front-end', 'backend-end'];
 var mts = [{
         title: "Design Team",
@@ -279,8 +297,8 @@ var ms = [{
         title: "General Survay",
         Qlist: mq,
         Tlist: mts,
-        from: "",
-        to: "",
+        from: "12-jan",
+        to: "23-may",
         ScoreTargetedRanges: [{
                 "bad": [0, 50]
             }, {

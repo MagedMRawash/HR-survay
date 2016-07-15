@@ -1,17 +1,17 @@
-.row.table-row.no-gutter.accordion-item(ng-repeat="ques in phases.mq[1] ")
+.row.table-row.no-gutter.accordion-item(ng-repeat="ques in phases.mq[1] track by $index")
         // a.col-md-12(role='button', data-toggle='collapse', href='#{% 'ms' + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')
         .col-md-12.accordion-child( href="#{% 'ms' + $index%}" ) 
             .row
                 .col-md-12
                     .row
                         .col-md-12
-                            h2(contenteditable, ng-model="ques.title" )  {%ques.title%} 
+                            h2(contenteditable, contenteditable-dir, ng-model="ques.title" )  {%ques.title%} 
                                 //span.desc-icon
                         .col-md-12.quesType
                             div(question-type , q-type="ques" ) 
                         .col-md-12.score(ng-show="hrin")
                             p Score : 
-                                span(contenteditable, ng-model="ques.score" ,ng-blur="test(ques)") {% ques.score %}
+                                span(contenteditable , contenteditable-dir, ng-model="ques.score" ,ng-change="test(ques)") {% ques.score %}
                 
                                                 
 .addList(id="", class="") 
@@ -42,11 +42,11 @@
                                                         span.caret
                                                     ul.dropdown-menu(aria-labelledby='QuesType')
                                                         li
-                                                            a.hr(href="#", ng-click=" newQues.Type  = 1 ;  newQues.Text  = 'Yes || No' ") Yes || No
+                                                            a.hr(hr, ng-click=" newQues.Type  = 1 ;  newQues.Text  = 'Yes || No' ") Yes || No
                                                         li
-                                                            a.emp(href="#", ng-click=" newQues.Type  = 2 ;  newQues.Text  = 'Single Selection' ")  Single Selection
+                                                            a.emp(hr, ng-click=" newQues.Type  = 2 ;  newQues.Text  = 'Single Selection' ")  Single Selection
                                                         li
-                                                            a.emp(href="#", ng-click=" newQues.Type  = 3 ;  newQues.Text  = 'Multiple Selection' ")  Multiple Selection
+                                                            a.emp(hr, ng-click=" newQues.Type  = 3 ;  newQues.Text  = 'Multiple Selection' ")  Multiple Selection
                                                 .row 
                                                     .col-md-12.error(ng-show="mqsubmitedType ")  Please chose Question Type 
                                     .row
@@ -57,6 +57,6 @@
                                             .row 
                                                 .col-md-12.error(ng-show="( mqForm.score.$touched &&  mqForm.score.$error.required  && (mqForm.score.$viewValue > 0  ? (mqForm.score.$viewValue  <= 10 ?  false : true ) : true ) ) || mqsubmitedscore ")  Please enter a Score between 0 & 10                         
                                 .col-md-3.pull-right
-                                    button.btn.btn-defulte(type="button", ng-click="addQuestion(newQues)") Submit 
+                                    button.btn.btn-defulte(type="button", ng-click="addQuestion(newQues);  ") Submit 
                                 
                 

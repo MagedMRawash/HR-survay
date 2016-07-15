@@ -5,7 +5,6 @@
                     .row
                         .col-md-6
                             h2 {%item.title%} 
-                                span.desc-icon
                         .col-md-6.MQTitle
                             .row
                                 .col-md-12
@@ -38,12 +37,12 @@
                                             .desc-icon
                                         .col-md-11.col-xs-10.col-sm-11
                                                 .dropdown
-                                                    a#QuesType(ng-click="   newTarget.departs = newTarget.departs || [] ",  href="#", data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                    a#QuesType(ng-click="   newTarget.departs = newTarget.departs || [] ",  hr,  data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                                                         .init-score {% ' Chose your Question from list ' %}
                                                         span.caret
                                                     ul.dropdown-menu(aria-labelledby='QuesType')
                                                         li(ng-repeat="dItem in departmentsList")
-                                                            a.hr(href="#", ng-click=" newTarget.departs.push(dItem) ") {% dItem %}
+                                                            a.hr(hr,  ng-click=" addSelect = addSelect == 'get' ?  multicoiseRemove(null ,newTarget.departs , $index)  :  multicoiseAdd('get',newTarget.departs , dItem) ", class="{%addSelect%}" ) {% dItem %}
                                                 .row 
                                                     .col-md-12.error(ng-show=" mtssubmiteddeparts ")  Please enter a valid date. 
                                 .col-md-12

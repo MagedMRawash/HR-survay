@@ -5,8 +5,8 @@
                 .col-md-12
                     .row
                         .col-md-12
-                            h2(contenteditable, ng-model="ques.title" ) {%ques.title%} 
-                                span.desc-icon
+                            h2 {%ques.title%} 
+                            //- (contenteditable, ng-model="ques.title" )
                         .col-md-8.MQTitle
                             .row
                                 .col-md-12
@@ -20,14 +20,14 @@
                             .row(ng-repeat=" mts in ques.Tlist ")
                                 .col-md-12 {% mts.title %}                                    
                             .row
-                                .col-md-12
+                                .col-md-12.dur
                                     h3 Duration
                                 .col-md-6.score
-                                    p(contenteditable, ng-model="ques.from" ) From : {% ques.from %}   
+                                    p From : {% ques.from %}   
                                 .col-md-6.score
-                                    p(contenteditable, ng-model="ques.to" ) To : {% ques.to %}   
+                                    p To : {% ques.to %}   
                                 .col-md-12.score
-                                    p Grade : {% ques.ScoreTargetedRanges  %}   
+                                    p Grade : {% ques.ScoreTargetedRanges[2][0].$key  %}   
                         
                                                         
                                                 
@@ -54,12 +54,12 @@
                                             .desc-icon
                                         .col-md-11.col-xs-10.col-sm-11
                                                 .dropdown
-                                                    a#QuesType(ng-click="   newSurv.Qlist = newSurv.Qlist || [] ",  href="#", data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                    a#QuesType(ng-click="   newSurv.Qlist = newSurv.Qlist || [] ",  hr,  data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                                                         .init-score {% ' Chose your Question from list ' %}
                                                         span.caret
                                                     ul.dropdown-menu(aria-labelledby='QuesType')
                                                         li(ng-repeat="mq in phases.mq[1]")
-                                                            a.hr(href="#", ng-click=" newSurv.Qlist.push(mq) ") {% mq.title %}
+                                                            a.hr(hr,  ng-click=" addSelect = addSelect == 'get' ?  multicoiseRemove(null ,newSurv.Qlist , $index)  :  multicoiseAdd('get',newSurv.Qlist , mq) ", class="{%addSelect%}") {% mq.title %}
                                                 .row 
                                                     .col-md-12.error(ng-show=" mssubmitedQlist ")  Please enter a valid date. 
                                 .col-md-6
@@ -68,12 +68,12 @@
                                             .desc-icon
                                         .col-md-11.col-xs-10.col-sm-11
                                                 .dropdown
-                                                    a#QuesType(ng-click="   newSurv.Tlist = newSurv.Tlist || [] ",  href="#", data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                                                    a#QuesType(ng-click="   newSurv.Tlist = newSurv.Tlist || [] ",  hr,  data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                                                         .init-score {% ' Chose your Question from list ' %}
                                                         span.caret
                                                     ul.dropdown-menu(aria-labelledby='QuesType')
                                                         li(ng-repeat="mts in phases.mts[1]")
-                                                            a.hr(href="#", ng-click=" newSurv.Tlist.push(mts) ") {% mts.title %} 
+                                                            a.hr(hr,  ng-click="addSelect = addSelect == 'get' ?  multicoiseRemove(null ,newSurv.Tlist , $index)  :  multicoiseAdd('get',newSurv.Tlist , mts) " class="{% addSelect %}") {% mts.title %} 
                                                 .row 
                                                     .col-md-12.error(ng-show=" mssubmitedTlist ")  Please enter a valid date. 
                                 .col-md-12

@@ -24,8 +24,6 @@ $.fn.equals = function (compareTo) {
 
 
 $("body").one("click", function (e: any) {
-  e.stopPropagation()
-  e.preventDefault()
 
   triggerEvent()
 
@@ -150,7 +148,7 @@ function clickedOutSide(e : any , params: any ) {
     if (!container.is(e.target) // if the target of the click isn't the container...
         && container.has(e.target).length === 0) // ... nor a descendant of the container
     {
-      return false 
+      return true 
     // return true  
     }else{
       return false 
@@ -178,3 +176,17 @@ function clickedOutSide(e : any , params: any ) {
 //   $(this).addClass('opened');
 //  }
 // })
+
+
+
+
+// $('.twest').fadeOut(0);
+
+
+
+
+
+
+
+
+

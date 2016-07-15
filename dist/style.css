@@ -78,6 +78,9 @@ body {
   .tab-content .addList .table-row.active .choises-col {
     margin: 0 -9px;
     display: block; }
+  .tab-content .tab-pane .table-row.active .error,
+  .tab-content .addList .table-row.active .error {
+    display: block; }
   .tab-content .tab-pane .table-row .choises-col,
   .tab-content .addList .table-row .choises-col {
     display: none; }
@@ -88,9 +91,6 @@ body {
       margin: 0 10px;
       background-color: #413d56;
       color: #fff; }
-      .tab-content .tab-pane .table-row .choises-col a.choise.get,
-      .tab-content .addList .table-row .choises-col a.choise.get {
-        background-color: #62b348 !important; }
   .tab-content .tab-pane .table-row:hover,
   .tab-content .addList .table-row:hover {
     opacity: 1; }
@@ -203,13 +203,11 @@ h1.time {
   .accordion-item .quesType,
   .accordion-item .score {
     display: none; }
-  .accordion-item .score {
-    margin-top: 25px; }
-    .accordion-item .score p {
-      font-size: 17px !important;
-      color: rgba(0, 0, 0, 0.4) !important;
-      line-height: 3.989;
-      text-align: left; }
+  .accordion-item .score p {
+    font-size: 17px !important;
+    color: rgba(0, 0, 0, 0.4) !important;
+    line-height: 3.989;
+    text-align: left; }
   .accordion-item.active {
     border: 0px solid #e0e0e0;
     margin: 0 -43px 15px;
@@ -390,6 +388,13 @@ section#intro {
   top: 50%;
   transform: translateY(-50%);
   width: 100%; }
+  section#intro h1 {
+    font-weight: 100;
+    color: #57fdc5;
+    margin: 30px auto;
+    float: inherit;
+    max-width: 500px;
+    text-align: center; }
   section#intro .dropdown {
     margin: 0 auto;
     float: none;
@@ -397,11 +402,14 @@ section#intro {
     width: auto; }
     section#intro .dropdown #dLabel {
       font-size: x-large;
-      background: #2e3a44;
+      background: #57fdc5;
       padding: 15px 55px;
-      color: #fff;
+      color: #2e3a44;
       text-decoration: none;
-      font-weight: 100; }
+      font-weight: 300; }
+      section#intro .dropdown #dLabel:active {
+        background: #2e3a44;
+        color: #57fdc5; }
     section#intro .dropdown ul {
       min-width: 100%; }
       section#intro .dropdown ul li {
@@ -440,14 +448,114 @@ button {
 .result {
   width: 100%;
   padding: 20px 0;
-  background: #62b348 !important;
+  background: #57fdc5 !important;
   font-weight: 300;
   font-size: 20px;
-  margin-top: 30px; }
+  margin-top: 30px;
+  color: #2e414d !important; }
   .result:hover {
-    background: #4ad01f !important; }
+    background: #57fdc5 !important; }
   .result:active {
-    background-color: #413d56 !important; }
+    background-color: #413d56 !important;
+    color: #fff !important; }
+
+.warp-all.animation.ng-hide-add,
+.animation.ng-hide-remove {
+  -webkit-transition: all linear .5s;
+  -moz-transition: all linear .5s;
+  -o-transition: all linear .5s;
+  transition: all linear .5s;
+  display: block !important; }
+
+.animation.ng-hide-add {
+  -webkit-transition: all linear 1.5s 2s;
+  -moz-transition: all linear 1.5s 2s;
+  -o-transition: all linear 1.5s 2s;
+  transition: all linear 1.5s 2s;
+  display: block !important; }
+
+.sendmas.animation.ng-hide-remove {
+  -webkit-transition: all linear 1s 1.5s;
+  -moz-transition: all linear 1s 1.5s;
+  -o-transition: all linear 1s 1.5s;
+  transition: all linear 1s 1.5s;
+  display: block !important; }
+
+.animation.ng-hide-add.ng-hide-add-active,
+.animation.ng-hide-remove {
+  opacity: 0; }
+
+.animation.ng-hide-add,
+.animation.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1; }
+
+.twest .time {
+  font-size: 40px;
+  position: fixed;
+  top: 0;
+  margin: 0;
+  right: 0;
+  background: #57fdc5;
+  z-index: 1000000;
+  padding: 10px 20px;
+  box-shadow: 1px 1px 32px #000;
+  color: #403d55; }
+
+section#intro .dropdown ul {
+  min-width: 100%;
+  margin-top: 22px; }
+
+.addopt {
+  background: #57fdc5; }
+
+*[contenteditable]:focus, *[contenteditable]:active {
+  padding: 10px 20px !important;
+  margin: 0 -20px;
+  background: url("assets/img/desc.png") rgba(171, 171, 171, 0.13) no-repeat 97% center;
+  background-size: 15px; }
+
+.error {
+  color: red;
+  padding: 10px 20px;
+  display: none; }
+
+#mq .score {
+  margin-top: 25px; }
+
+.dur {
+  margin-top: 15px; }
+  .dur P {
+    line-height: 0.8; }
+
+.sendmas {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  left: 54%; }
+  .sendmas h2 {
+    font-weight: 300;
+    font-size: -webkit-xxx-large;
+    line-height: 1;
+    width: 290px; }
+  .sendmas h1 {
+    ine-height: 0;
+    margin-bottom: 40px; }
+
+.get {
+  background-color: #57fdc5 !important;
+  color: #413d56 !important; }
+
+[data-toggle="dropdown"] {
+  height: 46px;
+  /* padding: 20px 10px; */ }
+
+[data-toggle="dropdown"] > div {
+  padding: 10px 10px; }
+
+.accordion-item .accordion-child ul a {
+  height: auto;
+  padding: 10px 20px; }
 
 /*=====================================================
 =            Bootstrap 2.3.2 Media Queries            =

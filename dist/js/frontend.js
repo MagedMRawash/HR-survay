@@ -17,8 +17,6 @@ $.fn.equals = function (compareTo) {
  * END JQuery new Method
  **************** */
 $("body").one("click", function (e) {
-    e.stopPropagation();
-    e.preventDefault();
     triggerEvent();
 });
 function triggerEvent() {
@@ -82,7 +80,7 @@ function clickedOutSide(e, params) {
     var container = params;
     if (!container.is(e.target) // if the target of the click isn't the container...
         && container.has(e.target).length === 0) {
-        return false;
+        return true;
     }
     else {
         return false;
@@ -103,3 +101,4 @@ function clickedOutSide(e, params) {
 //   $(this).addClass('opened');
 //  }
 // })
+// $('.twest').fadeOut(0);

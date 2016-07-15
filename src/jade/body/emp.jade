@@ -1,4 +1,4 @@
-.warp-all(ng-show="empin")
+.warp-all.animation(ng-show="empin")
     header
         .container
             .row
@@ -41,6 +41,13 @@
 
             .row
                 .col-md-12
-                    button.btn.btn-defulte.result(type="button", ng-click="sendform(phases.ms[1][0].Qlist )") Send Result  
+                    button.btn.btn-defulte.result(type="button", ng-click="sendform('d')") Send Result  
+                    //- button.btn.btn-defulte.result(type="button", ng-click="sendform(phases.ms[1][0].Qlist )") Send Result  
 
-
+.container
+    .row.accordion-item.active.sendmas.animation(ng-show="sendmas")
+        .col-md-12.accordion-child()
+            .row 
+                .col-md-12
+                        h2 Your Survay has been sent 
+                        h1  Thanks For Your Time

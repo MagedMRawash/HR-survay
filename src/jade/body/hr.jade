@@ -1,4 +1,4 @@
-.warp-all(ng-show="hrin")
+.warp-all.animation(ng-show="hrin")
     header
         .container
             .row
@@ -9,12 +9,12 @@
                         span HR Representative 
             
 
-    section.total-hour
+    section.total-hour.animation.twest(ng-show="twest") 
         .container
             .row
                 .col-md-12
-                    .time 63
-                        span  Hours
+                    .time Saved
+                        //- 63                        span  Hours
                              
     section.Ques
         .container
@@ -22,7 +22,7 @@
                 div.col-md-12
                     // Nav tabs
                     ul.nav.nav-tabs.row.no-gutter(role='tablist')
-                        li.col-md-3.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in phases ", class="{%$index ==0 ? 'active': ''%}")
+                        li.col-md-3.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in phases ", class="{%$index ==0 ? 'active': ''%}", ngc-load )
                             a(href='#{%key%}', aria-controls='{%key%}', role='tab', data-toggle='tab') {%phase[0]%}
                                 span {%phase[1].length%}
 

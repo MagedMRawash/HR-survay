@@ -20,6 +20,7 @@
   </head>
   <body ng-app="hrsurvay" ng-controller="HRSurvayController as HRSurvayQues">
     <section id="intro" ng-hide="introShow">
+      <h1 contenteditable contenteditable-dir ng-model="userName" ng-blur="storeNamechange()">{% userName    %} </h1>
       <div class="dropdown"><a id="dLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Personas<span class="caret"></span></a>
         <ul aria-labelledby="dLabel" class="dropdown-menu">
           <li><a href="#" ng-click="ChosePersonas('hr')" class="hr">HR</a></li>
@@ -27,7 +28,7 @@
         </ul>
       </div>
     </section>
-    <div ng-show="hrin" class="warp-all">
+    <div ng-show="hrin" class="warp-all animation">
       <header>
         <div class="container">
           <div class="row">
@@ -39,11 +40,12 @@
           </div>
         </div>
       </header>
-      <section class="total-hour">
+      <section ng-show="twest" class="total-hour animation twest"> 
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <div class="time">63<span> Hours</span></div>
+              <div class="time">Saved
+              </div>
             </div>
           </div>
         </div>
@@ -54,19 +56,19 @@
             <div class="col-md-12">
               <!-- Nav tabs-->
               <ul role="tablist" class="nav nav-tabs row no-gutter">
-                <li role="presentation" ng-repeat="(key , phase) in phases " class="col-md-3 col-sm-3 col-xs-12 {%$index ==0 ? 'active': ''%}"><a href="#{%key%}" aria-controls="{%key%}" role="tab" data-toggle="tab">{%phase[0]%}<span>{%phase[1].length%}</span></a></li>
+                <li role="presentation" ng-repeat="(key , phase) in phases " ngc-load class="col-md-3 col-sm-3 col-xs-12 {%$index ==0 ? 'active': ''%}"><a href="#{%key%}" aria-controls="{%key%}" role="tab" data-toggle="tab">{%phase[0]%}<span>{%phase[1].length%}</span></a></li>
               </ul>
               <!-- Tab panes-->
               <div class="tab-content">
                 <div role="tabpanel" id="mq" class="tab-pane fade in  active">
-                  <div ng-repeat="ques in phases.mq[1] " class="row table-row no-gutter accordion-item">
+                  <div ng-repeat="ques in phases.mq[1] track by $index" class="row table-row no-gutter accordion-item">
                     <!-- a.col-md-12(role='button', data-toggle='collapse', href='#{% 'ms' + $index%} ', aria-expanded='false', aria-controls='{%key + $index%}  ')-->
                     <div href="#{% 'ms' + $index%}" class="col-md-12 accordion-child"> 
                       <div class="row">
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2 contenteditable ng-model="ques.title"> {%ques.title%} 
+                              <h2 contenteditable contenteditable-dir ng-model="ques.title"> {%ques.title%} 
                                 <!--span.desc-icon-->
                               </h2>
                             </div>
@@ -74,7 +76,7 @@
                               <div question-type q-type="ques"> </div>
                             </div>
                             <div ng-show="hrin" class="col-md-12 score">
-                              <p>Score : <span contenteditable ng-model="ques.score" ng-blur="test(ques)">{% ques.score %}</span></p>
+                              <p>Score : <span contenteditable contenteditable-dir ng-model="ques.score" ng-change="test(ques)">{% ques.score %}</span></p>
                             </div>
                           </div>
                         </div>
@@ -108,9 +110,9 @@
                                         <div class="dropdown"><a id="QuesType" type="button" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <div class="init-score">{% newQues.Text || ' Chose your Question type ' %}</div><span class="caret"></span></a>
                                           <ul aria-labelledby="QuesType" class="dropdown-menu">
-                                            <li><a href="#" ng-click=" newQues.Type  = 1 ;  newQues.Text  = 'Yes || No' " class="hr">Yes || No</a></li>
-                                            <li><a href="#" ng-click=" newQues.Type  = 2 ;  newQues.Text  = 'Single Selection' " class="emp"> Single Selection</a></li>
-                                            <li><a href="#" ng-click=" newQues.Type  = 3 ;  newQues.Text  = 'Multiple Selection' " class="emp"> Multiple Selection</a></li>
+                                            <li><a hr ng-click=" newQues.Type  = 1 ;  newQues.Text  = 'Yes || No' " class="hr">Yes || No</a></li>
+                                            <li><a hr ng-click=" newQues.Type  = 2 ;  newQues.Text  = 'Single Selection' " class="emp"> Single Selection</a></li>
+                                            <li><a hr ng-click=" newQues.Type  = 3 ;  newQues.Text  = 'Multiple Selection' " class="emp"> Multiple Selection</a></li>
                                           </ul>
                                         </div>
                                         <div class="row"> 
@@ -131,7 +133,7 @@
                                     </div>
                                   </div>
                                   <div class="col-md-3 pull-right">
-                                    <button type="button" ng-click="addQuestion(newQues)" class="btn btn-defulte">Submit </button>
+                                    <button type="button" ng-click="addQuestion(newQues);  " class="btn btn-defulte">Submit </button>
                                   </div>
                                 </div>
                               </div>
@@ -150,7 +152,7 @@
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2 contenteditable ng-model="ques.title">{%ques.title%} <span class="desc-icon"></span></h2>
+                              <h2>{%ques.title%} </h2>
                             </div>
                             <div class="col-md-8 MQTitle">
                               <div class="row">
@@ -172,17 +174,17 @@
                                 <div class="col-md-12">{% mts.title %}                                    </div>
                               </div>
                               <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 dur">
                                   <h3>Duration</h3>
                                 </div>
                                 <div class="col-md-6 score">
-                                  <p contenteditable ng-model="ques.from">From : {% ques.from %}   </p>
+                                  <p>From : {% ques.from %}   </p>
                                 </div>
                                 <div class="col-md-6 score">
-                                  <p contenteditable ng-model="ques.to">To : {% ques.to %}   </p>
+                                  <p>To : {% ques.to %}   </p>
                                 </div>
                                 <div class="col-md-12 score">
-                                  <p>Grade : {% ques.ScoreTargetedRanges  %}   </p>
+                                  <p>Grade : {% ques.ScoreTargetedRanges[2][0].$key  %}   </p>
                                 </div>
                               </div>
                             </div>
@@ -215,10 +217,10 @@
                                         <div class="desc-icon"></div>
                                       </div>
                                       <div class="col-md-11 col-xs-10 col-sm-11">
-                                        <div class="dropdown"><a id="QuesType" ng-click="   newSurv.Qlist = newSurv.Qlist || [] " href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown"><a id="QuesType" ng-click="   newSurv.Qlist = newSurv.Qlist || [] " hr data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <div class="init-score">{% ' Chose your Question from list ' %}</div><span class="caret"></span></a>
                                           <ul aria-labelledby="QuesType" class="dropdown-menu">
-                                            <li ng-repeat="mq in phases.mq[1]"><a href="#" ng-click=" newSurv.Qlist.push(mq) " class="hr">{% mq.title %}</a></li>
+                                            <li ng-repeat="mq in phases.mq[1]"><a hr ng-click=" addSelect = addSelect == 'get' ?  multicoiseRemove(null ,newSurv.Qlist , $index)  :  multicoiseAdd('get',newSurv.Qlist , mq) " class="hr {%addSelect%}">{% mq.title %}</a></li>
                                           </ul>
                                         </div>
                                         <div class="row"> 
@@ -233,10 +235,10 @@
                                         <div class="desc-icon"></div>
                                       </div>
                                       <div class="col-md-11 col-xs-10 col-sm-11">
-                                        <div class="dropdown"><a id="QuesType" ng-click="   newSurv.Tlist = newSurv.Tlist || [] " href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown"><a id="QuesType" ng-click="   newSurv.Tlist = newSurv.Tlist || [] " hr data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <div class="init-score">{% ' Chose your Question from list ' %}</div><span class="caret"></span></a>
                                           <ul aria-labelledby="QuesType" class="dropdown-menu">
-                                            <li ng-repeat="mts in phases.mts[1]"><a href="#" ng-click=" newSurv.Tlist.push(mts) " class="hr">{% mts.title %} </a></li>
+                                            <li ng-repeat="mts in phases.mts[1]"><a hr ng-click="addSelect = addSelect == 'get' ?  multicoiseRemove(null ,newSurv.Tlist , $index)  :  multicoiseAdd('get',newSurv.Tlist , mts) " class="hr {% addSelect %}">{% mts.title %} </a></li>
                                           </ul>
                                         </div>
                                         <div class="row"> 
@@ -280,7 +282,7 @@
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-6">
-                              <h2>{%item.title%} <span class="desc-icon"></span></h2>
+                              <h2>{%item.title%} </h2>
                             </div>
                             <div class="col-md-6 MQTitle">
                               <div class="row">
@@ -321,10 +323,10 @@
                                         <div class="desc-icon"></div>
                                       </div>
                                       <div class="col-md-11 col-xs-10 col-sm-11">
-                                        <div class="dropdown"><a id="QuesType" ng-click="   newTarget.departs = newTarget.departs || [] " href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown"><a id="QuesType" ng-click="   newTarget.departs = newTarget.departs || [] " hr data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <div class="init-score">{% ' Chose your Question from list ' %}</div><span class="caret"></span></a>
                                           <ul aria-labelledby="QuesType" class="dropdown-menu">
-                                            <li ng-repeat="dItem in departmentsList"><a href="#" ng-click=" newTarget.departs.push(dItem) " class="hr">{% dItem %}</a></li>
+                                            <li ng-repeat="dItem in departmentsList"><a hr ng-click=" addSelect = addSelect == 'get' ?  multicoiseRemove(null ,newTarget.departs , $index)  :  multicoiseAdd('get',newTarget.departs , dItem) " class="hr {%addSelect%}">{% dItem %}</a></li>
                                           </ul>
                                         </div>
                                         <div class="row"> 
@@ -354,7 +356,7 @@
         </div>
       </section>
     </div>
-    <div ng-show="empin" class="warp-all">
+    <div ng-show="empin" class="warp-all animation">
       <header>
         <div class="container">
           <div class="row">
@@ -408,16 +410,29 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <button type="button" ng-click="sendform(phases.ms[1][0].Qlist )" class="btn btn-defulte result">Send Result  </button>
+              <button type="button" ng-click="sendform('d')" class="btn btn-defulte result">Send Result  </button>
             </div>
           </div>
         </div>
       </section>
     </div>
+    <div class="container">
+      <div ng-show="sendmas" class="row accordion-item active sendmas animation">
+        <div class="col-md-12 accordion-child">
+          <div class="row"> 
+            <div class="col-md-12">
+              <h2>Your Survay has been sent </h2>
+              <h1> Thanks For Your Time</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins)-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="./js/script.js"></script>
     <script src="./js/frontend.js"></script>
