@@ -5,11 +5,11 @@
 */
 ///////////////////////
 // TO DO List 
-//  check the repeated 
+//  --
 ///////////////////////
 var angular: any;
 var go;
-var app = angular.module('hrsurvay', ['ngAnimate'], function ($interpolateProvider) {
+var app = angular.module('hrsurvay', ['ngAnimate', 'nvd3'], function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{%');
     $interpolateProvider.endSymbol('%}');
 });
@@ -32,43 +32,51 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
 
     $scope.tasks = [];
     $scope.departmentsList = departmentsList;
+    angular.element('[contenteditable]').on('change', function () {
+        $scope.twest = $scope.twest == true ? false : true;
+        $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1]
+
+        console.log($scope.phases.ms[1][0]);
+        $scope.storephaseschange()
+
+    })
 
 
     //////////// Storing data 
 
-    $scope.storeNamechange  = function () {
-       localStorage.setItem('userName', $scope.userName)
+    $scope.storeNamechange = function () {
+        localStorage.setItem('userName', $scope.userName)
     }
-    $scope.getName  = function () {    
+    $scope.getName = function () {
         if (!localStorage.getItem('userName')) {
-            return false 
+            return false
         } else {
             return localStorage.getItem('userName');
-   }
+        }
 
     }
-    $scope.userName = $scope.getName()   || "Please Enter Your Name"  ; 
+    $scope.userName = $scope.getName() || "Please Enter Your Name";
 
 
 
 
-    $scope.storephaseschange  = function () {
-       localStorage.setItem('phases', JSON.stringify($scope.phases)) 
+    $scope.storephaseschange = function () {
+        localStorage.setItem('phases', JSON.stringify($scope.phases))
     }
 
-    $scope.getphases  = function () {    
+    $scope.getphases = function () {
         if (!localStorage.getItem('phases')) {
-            return false 
+            return false
         } else {
             return JSON.parse(localStorage.getItem('phases'));
-   }
+        }
 
     }
-     $scope.phases  = $scope.getphases()   || {
-            mq: ["Manage Questions", mq],
-            ms: ["Manage surveys", ms],
-            mts: ["Manage targeted sector", mts]
-        };
+    $scope.phases = $scope.getphases() || {
+        mq: ["Manage Questions", mq],
+        ms: ["Manage surveys", ms],
+        mts: ["Manage targeted sector", mts]
+    };
 
 
     ////////// Add Question 
@@ -202,7 +210,7 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
         $scope.EmpScor = $scope.EmpScor || 0;
         //  console.log(obj);
         console.log($scope.phases);
-        
+
         if (obj == null) {
             $scope.EmpScor -= score.score || 0;
         } else {
@@ -241,9 +249,9 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
         $scope.empin = false;
         $scope.sendmas = true;
 
-                $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1]
+        $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1]
 
-       console.log( $scope.phases.ms[1][0]);
+        console.log($scope.phases.ms[1][0]);
 
     }
 
@@ -251,17 +259,97 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
         $scope.twest = $scope.twest == true ? false : true;
         $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1]
 
-       console.log( $scope.phases.ms[1][0]);
-       $scope.storephaseschange() 
+        // console.log($scope.phases.ms[1][0]);
+        $scope.storephaseschange()
 
         // console.log(obje);
 
     }
 
     $scope.ChoseAnswer = function (value) {
-       // console.log(value);
-      //  angular.element('.twest').fadeIn().delay(2000).fadeOut();
+        // console.log(value);
+        //  angular.element('.twest').fadeIn().delay(2000).fadeOut();
     }
+
+
+
+    ///////////////  report Section
+
+    /* Chart options */
+    // $scope.options = { /* JSON data */ };
+      $scope.options = {
+            chart: {
+                type: 'pieChart',
+                height: 500,
+                width: 500,
+                x: function(d){return d.key;},
+                y: function(d){return d.y;},
+                showLabels: true,
+                duration: 500,
+                labelThreshold: 0.01,
+                labelSunbeamLayout: true,
+                legend: {
+                    margin: {
+                        top: 5,
+                        right: 35,
+                        bottom: 5,
+                        left: 0
+                    }
+                }
+            }
+        };
+
+    /* Chart data */
+    // $scope.data = { /* JSON data */ }
+
+
+    
+        $scope.data = [
+            {
+                key: "One",
+                y: 5
+            },
+            {
+                key: "Two",
+                y: 2
+            },
+            {
+                key: "Three",
+                y: 9
+            },
+            {
+                key: "Four",
+                y: 7
+            },
+            {
+                key: "Five",
+                y: 4
+            },
+            {
+                key: "Six",
+                y: 3
+            },
+            {
+                key: "Seven",
+                y: .5
+            }
+        ];
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
 }]);
 
 
@@ -285,7 +373,14 @@ app.directive("contenteditableDir", function () {
 
             element.bind("blur keyup change", function () {
                 scope.$apply(read);
-            });
+                scope.twest = scope.twest == true ? false : true;
+                scope.phases.ms[1][0].Qlist = scope.phases.mq[1]
+
+                scope.storephaseschange()
+
+            })
+
+        });
         }
     };
 });
@@ -296,15 +391,15 @@ app.directive('questionType', function ($compile) {
     function postLink(scope, elem, attrs) {
         var obj = scope.ques;
         if (obj.quesType[0] == 1) {
-            var temp = '<div class="choises-col" >\
-      <a href="#"    class="choiseItem"   ng-click="ChoseAnswer(ans)" >Yes</a>\
-      <a href="#"    class="choiseItem"   ng-click="ChoseAnswer(ans)" >No</a>\
+            var temp = '<div class="choises-col row" >\
+      <a     class="choiseItem"   ng-click="ChoseAnswer(ans)" >Yes</a>\
+      <a    class="choiseItem"   ng-click="ChoseAnswer(ans)" >No</a>\
        </div>';
         }
-        if (obj.quesType[0] == 2) {
-            var temp = '<div class="choises-col" >\
-      <a href="#"  contenteditable  class="choiseItem" ng-repeat=" ans  in ques.quesType[1] "   ng-model="ques.quesType[1].ans"  ng-click="ChoseAnswer(ans)" >{%ans%}</a>\
-      <a href="#"    class="choiseItem addopt"    ng-click="ques.quesType[1].push(\'Click to Edit \' + ques.quesType[1].length)" > Click to Add more Options </a>\
+        if ((obj.quesType[0] == 3) || (obj.quesType[0] == 2)) {
+            var temp = '<div class="choises-col row " >\
+      <a   contenteditable  class="choiseItem col-md-2  col-xs-3" ng-repeat=" ans  in ques.quesType[1] "   ng-model="ques.quesType[1].ans"  ng-click="ChoseAnswer(ans)" >{%ans%}</a>\
+      <a    class="choiseItem addopt col-md-12"    ng-click="ques.quesType[1].push(\'Click to Edit \' + ques.quesType[1].length)" > Click to Add more Options </a>\
        </div>';
         }
         elem.html(temp);

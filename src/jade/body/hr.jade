@@ -7,14 +7,7 @@
                         //span.logo-icon  
                         | Personas : 
                         span HR Representative 
-            
 
-    section.total-hour.animation.twest(ng-show="twest") 
-        .container
-            .row
-                .col-md-12
-                    .time Saved
-                        //- 63                        span  Hours
                              
     section.Ques
         .container
@@ -25,6 +18,10 @@
                         li.col-md-3.col-sm-3.col-xs-12(role='presentation', ng-repeat="(key , phase) in phases ", class="{%$index ==0 ? 'active': ''%}", ngc-load )
                             a(href='#{%key%}', aria-controls='{%key%}', role='tab', data-toggle='tab') {%phase[0]%}
                                 span {%phase[1].length%}
+                        li.col-md-3.col-sm-3.col-xs-12(role='presentation')
+                            a(href='#report', aria-controls='report', role='tab', data-toggle='tab') Report 
+                                //- span {%phase[1].length%}
+
 
                     // Tab panes
                     .tab-content
@@ -34,6 +31,8 @@
                             include ./hrms.jade 
                         .tab-pane.fade.in(role='tabpanel',id="mts")                            
                             include ./hrmts.jade 
+                        .tab-pane.fade.in(role='tabpanel',id="report")                            
+                            include ./hrreport.jade 
 
                                 
 

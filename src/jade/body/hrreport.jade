@@ -1,0 +1,13 @@
+.row.table-row.no-gutter.accordion-item(ng-repeat="item in phases.ms[1] ")
+        .col-md-12.accordion-child
+            .row
+                .col-md-12
+                    .row
+                        .col-md-12
+                            h2 {%item.title%} 
+                        .col-md-12.MQTitle
+                            .row
+                                nvd3(options='options', data='data')
+
+                        
+                      

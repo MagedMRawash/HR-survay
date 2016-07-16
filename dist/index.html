@@ -40,16 +40,6 @@
           </div>
         </div>
       </header>
-      <section ng-show="twest" class="total-hour animation twest"> 
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="time">Saved
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <section class="Ques">
         <div class="container">
           <div class="row">
@@ -57,6 +47,8 @@
               <!-- Nav tabs-->
               <ul role="tablist" class="nav nav-tabs row no-gutter">
                 <li role="presentation" ng-repeat="(key , phase) in phases " ngc-load class="col-md-3 col-sm-3 col-xs-12 {%$index ==0 ? 'active': ''%}"><a href="#{%key%}" aria-controls="{%key%}" role="tab" data-toggle="tab">{%phase[0]%}<span>{%phase[1].length%}</span></a></li>
+                <li role="presentation" class="col-md-3 col-sm-3 col-xs-12"><a href="#report" aria-controls="report" role="tab" data-toggle="tab">Report 
+                    </a></li>
               </ul>
               <!-- Tab panes-->
               <div class="tab-content">
@@ -68,7 +60,7 @@
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2 contenteditable contenteditable-dir ng-model="ques.title"> {%ques.title%} 
+                              <h2 contenteditable contenteditable-dir ng-model="ques.title" ng-change="test(ques)"> {%ques.title%} 
                                 <!--span.desc-icon-->
                               </h2>
                             </div>
@@ -350,6 +342,26 @@
                     </div>
                   </div>
                 </div>
+                <div role="tabpanel" id="report" class="tab-pane fade in">                           
+                  <div ng-repeat="item in phases.ms[1] " class="row table-row no-gutter accordion-item">
+                    <div class="col-md-12 accordion-child">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h2>{%item.title%} </h2>
+                            </div>
+                            <div class="col-md-12 MQTitle">
+                              <div class="row">
+                                <nvd3 options="options" data="data"></nvd3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -392,7 +404,7 @@
                   <div ng-repeat="empQues  in phases.ms[1][0].Qlist " class="row table-row no-gutter accordion-item">
                     <div class="col-md-12 accordion-child">
                       <div class="row"> 
-                        <div class="col-md-10 col-xs-8">
+                        <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
                               <h2>{%empQues.title%} 
@@ -428,11 +440,24 @@
         </div>
       </div>
     </div>
+    <section ng-show="twest" class="total-hour animation twest"> 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="time">Saved</div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins)-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.5/angular-nvd3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="./js/script.js"></script>
     <script src="./js/frontend.js"></script>
