@@ -1,4 +1,4 @@
-.row.table-row.no-gutter.accordion-item(ng-repeat="item in phases.ms[1] ")
+.row.table-row.no-gutter.accordion-item.report(ng-repeat="item in phases.ms[1] ")
         .col-md-12.accordion-child
             .row
                 .col-md-12
@@ -7,7 +7,61 @@
                             h2 {%item.title%} 
                         .col-md-12.MQTitle
                             .row
-                                nvd3(options='options', data='data')
+                                .col-md-6
+                                    nvd3(options='options', data='data')
+                                    h3 Number of completed vs. not completed from targeted group   
+                                .col-md-6
+                                    .row
+                                        .col-md-12
+                                            h3 Target Users
+                                    .row(ng-repeat=" mts in item.Tlist ")
+                                        .col-md-12 
+                                            p {% mts.title %}          
 
-                        
-                      
+                                    hr.more-black
+                                    
+                                    .row
+                                        .col-md-12.dur
+                                            h3 Due date / ended    
+                                            .row
+                                                .col-md-9
+                                                    p Ended Survay 
+                                                .col-md-3
+                                                    p  7 participants 
+                                            hr
+                                            .row
+                                                .col-md-9
+                                                    p  Anther Finished Survay 
+                                                .col-md-3
+                                                    p  5 participants 
+
+
+
+                                    hr.more-black
+                                    
+                                    .row
+                                        .col-md-12.dur
+                                            h3 Finished Survay 
+                                            .row
+                                                .col-md-9
+                                                    p Survay  title 
+                                                .col-md-3
+                                                    p  9 participants 
+                                            hr
+                                            .row
+                                                .col-md-9
+                                                    p  Anther Survay Title
+                                                .col-md-3
+                                                    p  3 participants 
+
+                            hr.more-black
+                            .row
+                                .col-md-12
+                                    h3 Scores per Target Users Ranges
+                                    .row
+                                        .col-md-6(ng-repeat=" mts in  phases.ms[1][0].Tlist ") 
+                                            p.col-md-12 {% mts.title %}
+                                            .col-md-12 
+                                                nvd3(options='options', data='datarandom')          
+
+

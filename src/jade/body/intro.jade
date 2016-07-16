@@ -2,7 +2,7 @@ section#intro(ng-hide="introShow")
     h1(contenteditable, contenteditable-dir, ng-model="userName",ng-blur="storeNamechange()") {% userName    %} 
     .dropdown
         a#dLabel(data-target='#', href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-            | Chose Personas
+            | Chose Role
             span.caret
         ul.dropdown-menu(aria-labelledby='dLabel')
             li

@@ -35,7 +35,7 @@
                                                     h2 {%empQues.title%} 
                                                         //- span.desc-icon
                                                 .col-md-12.choises-col
-                                                    a.choise(href="#",ng-repeat="choise in empQues.quesType[1]", ng-click="( empQues.quesType[0] == 3 ?   null  :  (  $root.choiseClass[$parent.$index] = null  )   ) ;  $root.choiseClass[$parent.$index][$index]  =  $root.choiseClass[$parent.$index][$index]  == 'get' ? null : 'get' ;   changeScore(empQues ,  $root.choiseClass )   ", class="{%   $root.choiseClass[$parent.$index][$index] + ' '  + empQues.quesType[0] %}") {% choise %} 
+                                                    a.choise(hr,ng-repeat="choise in empQues.quesType[1]", ng-click="( empQues.quesType[0] == 3 ?   null  :  (  $root.choiseClass[$parent.$index] = null  )   ) ;  $root.choiseClass[$parent.$index][$index]  =  $root.choiseClass[$parent.$index][$index]  == 'get' ? null : 'get' ;   changeScore(empQues ,  $root.choiseClass )   ", class="{%   $root.choiseClass[$parent.$index][$index] + ' '  + empQues.quesType[0] %}") {% choise %} 
  
                                         
 

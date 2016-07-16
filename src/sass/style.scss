@@ -70,7 +70,7 @@ body {
             text-align: left;
             /* z-index: 64; */
             span {
-                font-size: 10px;
+                font-size: 13px;
                 //color: white;
                 /* line-height: 5.186; */
                 margin-left: 6px;
@@ -172,14 +172,7 @@ body {
                     text-align: right;
                 }
                 .comment {
-                    background: url("assets/svg/comment.svg") no-repeat center center;
-                    text-indent: -9999px;
-                    height: 70px;
-                    background-size: 26px;
-                    opacity: .4;
-                    border: none;
-                    display: block;
-                    width: 100%;
+
                 }
             }
         }
@@ -549,13 +542,13 @@ section#intro {
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
-    h1{
-            font-weight: 100;
-            color: #57fdc5;
-            margin: 30px auto;
-            float: inherit;
-            max-width: 500px;
-            text-align: center;
+    h1 {
+        font-weight: 100;
+        color: #57fdc5;
+        margin: 30px auto;
+        float: inherit;
+        max-width: 650px;
+        text-align: center;
     }
     .dropdown {
         margin: 0 auto;
@@ -652,10 +645,10 @@ button {
 }
 
 .animation.ng-hide-add {
-    -webkit-transition: all linear 1.5s 2s;
-    -moz-transition: all linear 1.5s 2s;
-    -o-transition: all linear 1.5s 2s;
-    transition: all linear 1.5s 2s;
+    -webkit-transition: all linear 1.5s 1s;
+    -moz-transition: all linear 1.5s 1s;
+    -o-transition: all linear 1.5s 1s;
+    transition: all linear 1.5s 1s;
     display: block!important;
 }
 
@@ -709,8 +702,11 @@ section#intro .dropdown ul {
     }
 }
 
-.accordion-item.active div[class*="col"] h2[contenteditable]{
+.accordion-item.active div[class*="col"] h2[contenteditable] {
+    &:focus,
+    &:active {
         padding: 10px 20px !important;
+    }
 }
 
 .error {
@@ -746,7 +742,7 @@ section#intro .dropdown ul {
         width: 290px;
     }
     h1 {
-        ine-height: 0;
+        line-height: 0;
         margin-bottom: 40px;
     }
 }
@@ -756,18 +752,44 @@ section#intro .dropdown ul {
     color: $HRFcolor !important;
 }
 
-
-[data-toggle="dropdown"]{
+[data-toggle="dropdown"] {
     height: 46px;
     /* padding: 20px 10px; */
 }
 
-[data-toggle="dropdown"] >  div{
-      padding: 10px 10px;
-      }
+[data-toggle="dropdown"]> div {
+    padding: 10px 10px;
+}
 
-      .accordion-item .accordion-child ul a {
+.accordion-item .accordion-child ul a {
     height: auto;
     padding: 10px 20px;
 }
+
+.report {
+    h3 {
+        text-transform: uppercase;
+    }
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 9px;
+}
+
+ hr.more-black{
+         border-color: rgba(0, 0, 0, 0.26);
+
+ }
+
+
+ a#QuesType > * {
+    float: left;
+ }
+ a#QuesType span {
+         padding: 1px;
+    margin-top: 16px;
+    float: right;
+ }
+
 @import 'responsive.scss';

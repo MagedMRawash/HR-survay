@@ -5,13 +5,13 @@
                 .col-md-12
                     .row
                         .col-md-12
-                            h2(contenteditable, contenteditable-dir, ng-model="ques.title" , ng-change="test(ques)" )  {%ques.title%} 
+                            h2(contenteditable, contenteditable-dir, ng-model="ques.title" , ng-blur="test(ques)" )  {%ques.title%} 
                                 //span.desc-icon
                         .col-md-12.quesType
                             div(question-type , q-type="ques" ) 
                         .col-md-12.score(ng-show="hrin")
                             p Score : 
-                                span(contenteditable , contenteditable-dir, ng-model="ques.score" ,ng-change="test(ques)") {% ques.score %}
+                                span(contenteditable , contenteditable-dir, ng-model="ques.score" ,ng-blur="test(ques)", integer ) {% ques.score %}
                 
                                                 
 .addList(id="", class="") 

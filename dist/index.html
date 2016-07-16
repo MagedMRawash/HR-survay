@@ -21,7 +21,7 @@
   <body ng-app="hrsurvay" ng-controller="HRSurvayController as HRSurvayQues">
     <section id="intro" ng-hide="introShow">
       <h1 contenteditable contenteditable-dir ng-model="userName" ng-blur="storeNamechange()">{% userName    %} </h1>
-      <div class="dropdown"><a id="dLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Personas<span class="caret"></span></a>
+      <div class="dropdown"><a id="dLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Role<span class="caret"></span></a>
         <ul aria-labelledby="dLabel" class="dropdown-menu">
           <li><a href="#" ng-click="ChosePersonas('hr')" class="hr">HR</a></li>
           <li><a href="#" ng-click="ChosePersonas('emp')" class="emp">Employee</a></li>
@@ -60,7 +60,7 @@
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-12">
-                              <h2 contenteditable contenteditable-dir ng-model="ques.title" ng-change="test(ques)"> {%ques.title%} 
+                              <h2 contenteditable contenteditable-dir ng-model="ques.title" ng-blur="test(ques)"> {%ques.title%} 
                                 <!--span.desc-icon-->
                               </h2>
                             </div>
@@ -68,7 +68,7 @@
                               <div question-type q-type="ques"> </div>
                             </div>
                             <div ng-show="hrin" class="col-md-12 score">
-                              <p>Score : <span contenteditable contenteditable-dir ng-model="ques.score" ng-change="test(ques)">{% ques.score %}</span></p>
+                              <p>Score : <span contenteditable contenteditable-dir ng-model="ques.score" ng-blur="test(ques)" integer>{% ques.score %}</span></p>
                             </div>
                           </div>
                         </div>
@@ -176,7 +176,9 @@
                                   <p>To : {% ques.to %}   </p>
                                 </div>
                                 <div class="col-md-12 score">
-                                  <p>Grade : {% ques.ScoreTargetedRanges[2][0].$key  %}   </p>
+                                  <p>Grade : Very Good</p>
+                                  
+                                  
                                 </div>
                               </div>
                             </div>
@@ -343,7 +345,7 @@
                   </div>
                 </div>
                 <div role="tabpanel" id="report" class="tab-pane fade in">                           
-                  <div ng-repeat="item in phases.ms[1] " class="row table-row no-gutter accordion-item">
+                  <div ng-repeat="item in phases.ms[1] " class="row table-row no-gutter accordion-item report">
                     <div class="col-md-12 accordion-child">
                       <div class="row">
                         <div class="col-md-12">
@@ -353,7 +355,82 @@
                             </div>
                             <div class="col-md-12 MQTitle">
                               <div class="row">
-                                <nvd3 options="options" data="data"></nvd3>
+                                <div class="col-md-6">
+                                  <nvd3 options="options" data="data"></nvd3>
+                                  <h3>Number of completed vs. not completed from targeted group   </h3>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <h3>Target Users</h3>
+                                    </div>
+                                  </div>
+                                  <div ng-repeat=" mts in item.Tlist " class="row">
+                                    <div class="col-md-12"> 
+                                      <p>{% mts.title %}          </p>
+                                    </div>
+                                  </div>
+                                  <hr class="more-black">
+                                  <div class="row">
+                                    <div class="col-md-12 dur">
+                                      <h3>Due date / ended    </h3>
+                                      <div class="row">
+                                        <div class="col-md-9">
+                                          <p>Ended Survay </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <p> 7 participants </p>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-md-9">
+                                          <p> Anther Finished Survay </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <p> 5 participants </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <hr class="more-black">
+                                  <div class="row">
+                                    <div class="col-md-12 dur">
+                                      <h3>Finished Survay </h3>
+                                      <div class="row">
+                                        <div class="col-md-9">
+                                          <p>Survay  title </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <p> 9 participants </p>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-md-9">
+                                          <p> Anther Survay Title</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <p> 3 participants </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <hr class="more-black">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <h3>Scores per Target Users Ranges</h3>
+                                  <div class="row">
+                                    <div ng-repeat=" mts in  phases.ms[1][0].Tlist " class="col-md-6"> 
+                                      <p class="col-md-12">{% mts.title %}</p>
+                                      <div class="col-md-12"> 
+                                        <nvd3 options="options" data="datarandom">         </nvd3>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -410,7 +487,7 @@
                               <h2>{%empQues.title%} 
                               </h2>
                             </div>
-                            <div class="col-md-12 choises-col"><a href="#" ng-repeat="choise in empQues.quesType[1]" ng-click="( empQues.quesType[0] == 3 ?   null  :  (  $root.choiseClass[$parent.$index] = null  )   ) ;  $root.choiseClass[$parent.$index][$index]  =  $root.choiseClass[$parent.$index][$index]  == 'get' ? null : 'get' ;   changeScore(empQues ,  $root.choiseClass )   " class="choise {%   $root.choiseClass[$parent.$index][$index] + ' '  + empQues.quesType[0] %}">{% choise %} </a></div>
+                            <div class="col-md-12 choises-col"><a hr ng-repeat="choise in empQues.quesType[1]" ng-click="( empQues.quesType[0] == 3 ?   null  :  (  $root.choiseClass[$parent.$index] = null  )   ) ;  $root.choiseClass[$parent.$index][$index]  =  $root.choiseClass[$parent.$index][$index]  == 'get' ? null : 'get' ;   changeScore(empQues ,  $root.choiseClass )   " class="choise {%   $root.choiseClass[$parent.$index][$index] + ' '  + empQues.quesType[0] %}">{% choise %} </a></div>
                           </div>
                         </div>
                       </div>

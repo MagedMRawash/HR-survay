@@ -13,7 +13,7 @@ var app = angular.module('hrsurvay', ['ngAnimate', 'nvd3'], function ($interpola
     $interpolateProvider.startSymbol('{%');
     $interpolateProvider.endSymbol('%}');
 });
-app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http) {
+app.controller('HRSurvayController', ['$timeout','$scope', '$http' , function ($timeout,$scope, $http) {
     ///////  ChosePersonas
     $scope.hrin = false; // defult false
     $scope.empin = false;
@@ -32,7 +32,7 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
 
     $scope.tasks = [];
     $scope.departmentsList = departmentsList;
-    angular.element('[contenteditable]').on('change', function () {
+    angular.element('[contenteditable]').on('blur', function () {
         $scope.twest = $scope.twest == true ? false : true;
         $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1]
 
@@ -55,7 +55,7 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
         }
 
     }
-    $scope.userName = $scope.getName() || "Please Enter Your Name";
+    $scope.userName = $scope.getName() || "Please Write Your Name & Refresh ";
 
 
 
@@ -75,7 +75,7 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
     $scope.phases = $scope.getphases() || {
         mq: ["Manage Questions", mq],
         ms: ["Manage surveys", ms],
-        mts: ["Manage targeted sector", mts]
+        mts: ["Manage sector", mts]
     };
 
 
@@ -256,7 +256,19 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
     }
 
     $scope.test = function (obje) {
+
         $scope.twest = $scope.twest == true ? false : true;
+        
+        $timeout(function(){
+        $scope.twest = $scope.twest == true ? false : true;
+
+        }, 500)
+
+
+
+        //$timeout
+        
+
         $scope.phases.ms[1][0].Qlist = $scope.phases.mq[1]
 
         // console.log($scope.phases.ms[1][0]);
@@ -280,8 +292,8 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
       $scope.options = {
             chart: {
                 type: 'pieChart',
-                height: 500,
-                width: 500,
+                height: 400,
+                width: 400,
                 x: function(d){return d.key;},
                 y: function(d){return d.y;},
                 showLabels: true,
@@ -293,7 +305,7 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
                         top: 5,
                         right: 35,
                         bottom: 5,
-                        left: 0
+                        left: -50
                     }
                 }
             }
@@ -306,32 +318,31 @@ app.controller('HRSurvayController', ['$scope', '$http', function ($scope, $http
     
         $scope.data = [
             {
-                key: "One",
+                key: "completed",
                 y: 5
             },
             {
-                key: "Two",
-                y: 2
+                key: "not completed",
+                y: Math.floor(Math.random() * 100)
+            }
+        ];
+
+       $scope.datarandom = [
+            {
+                key: "Bad",
+                y: 5
             },
             {
-                key: "Three",
-                y: 9
+                key: "Good",
+                y: Math.floor(Math.random() * 100)
             },
             {
-                key: "Four",
-                y: 7
+                key: "Very Good",
+                y: Math.floor(Math.random() * 100)
             },
             {
-                key: "Five",
-                y: 4
-            },
-            {
-                key: "Six",
-                y: 3
-            },
-            {
-                key: "Seven",
-                y: .5
+                key: "Excellent",
+                y: Math.floor(Math.random() * 100)
             }
         ];
 
@@ -371,18 +382,12 @@ app.directive("contenteditableDir", function () {
                 element.html(ngModel.$viewValue || "");
             };
 
-            element.bind("blur keyup change", function () {
+            element.bind("blur keyup ", function () {
                 scope.$apply(read);
-                scope.twest = scope.twest == true ? false : true;
-                scope.phases.ms[1][0].Qlist = scope.phases.mq[1]
+            });
 
-                scope.storephaseschange()
-
-            })
-
-        });
         }
-    };
+    }
 });
 
 
@@ -412,6 +417,23 @@ app.directive('questionType', function ($compile) {
         transclude: true
     }
 })
+
+
+
+
+
+app.directive('integer', function(){
+    return {
+        require: 'ngModel',
+        link: function(scope, ele, attr, ctrl){
+            ctrl.$parsers.unshift(function(viewValue){
+                return parseInt(viewValue, 10);
+            });
+        }
+    };
+});
+
+
 
 
 
